@@ -1,0 +1,41 @@
+<div class="weather-container">
+    <div class="weather-header">
+      <h2>{{ weather?.name }} 的天氣</h2>
+    </div>
+    <div class="weather-content">
+      <div class="weather-info">
+        <div class="temp">
+          <img src="/assets/temp_icon.png" alt="溫度圖標" class="icon">
+          <span class="value">{{ weather?.main.temp }} °C</span>
+        </div>
+        <div class="humidity">
+          <img src="/assets/humidity-icon.png" alt="濕度圖標" class="icon">
+          <span class="value">濕度: {{ weather?.main.humidity }} %</span>
+        </div>
+        <div class="pressure">
+          <img src="/assets/pressure-icon.png" alt="壓力圖標" class="icon">
+          <span class="value">氣壓: {{ weather?.main.pressure }} hPa</span>
+        </div>
+        <div class="weather-description">
+          <img src="/assets/weather-icon.png" alt="天氣狀況圖標" class="icon">
+          <span class="value">{{ weather?.weather[0].description }}</span>
+        </div>
+      </div>
+      <div class="weather-other-info">
+        <div class="wind">
+          <img src="/assets/wind-icon.png" alt="風速圖標" class="icon">
+          <span class="value">風速: {{ weather?.wind.speed }} m/s</span>
+      </div>
+      <div class="sunrise">
+        <img src="/assets/sunrise-icon.png" alt="日出圖標" class="icon">
+        <span class="value">日出: {{ sunrise }}</span>
+      </div>
+      <div class="sunset">
+        <img src="/assets/sunset-icon.png" alt="日落圖標" class="icon">
+        <span class="value">日落: {{ sunset }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
