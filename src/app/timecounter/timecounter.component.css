@@ -1,0 +1,39 @@
+.main{
+    align-items: center;
+}
+.countdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.time_box {
+    text-align:  center;
+}
+
+.time {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.label {
+    display: block;
+    font-size: 1em;
+    margin-top: 5px;
+}
+
+.image_adjust{
+    align-items: center;
+}
+@media screen and (max-width: 768px){
+    img{
+        height: auto;
+        width: 90%;
+    }    
+}
+
+
+
+  
