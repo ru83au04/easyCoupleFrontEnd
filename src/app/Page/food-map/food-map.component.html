@@ -3,8 +3,6 @@
         <button class="get_location" id="getLocation">Get Location</button>
     </div>
     <div class="map_container" *ngIf="loadMap">
-        <google-map
-            [center]="currentLocation"
-        ></google-map>
+        <app-google-map [currentLocation] = "currentLocation"></app-google-map>
     </div>
 </main>
