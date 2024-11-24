@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { GoogleMap, MapMarker } from '@angular/google-maps';
-import { MapService } from '../map.service';
-import { environment } from '../../environments/environment';
+import { MapService } from '../../Service/map.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-google-map',

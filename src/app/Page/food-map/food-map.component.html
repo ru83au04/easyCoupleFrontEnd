@@ -1,0 +1,10 @@
+<main>
+    <div>
+        <button class="get_location" id="getLocation">Get Location</button>
+    </div>
+    <div class="map_container" *ngIf="loadMap">
+        <google-map
+            [center]="currentLocation"
+        ></google-map>
+    </div>
+</main>

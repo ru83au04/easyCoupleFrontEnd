@@ -1,8 +1,8 @@
 <div>
   <div>
     <button routerLink="">首頁</button>
-    <button routerLink="/weather">現在天氣</button>
-    <button routerLink="/map">現在在哪裡</button>
+    <button [routerLink]="['/weather', currentLat, currentLng]">現在天氣</button>
+    <button [routerLink]="['/foodmap', currentLat, currentLng]">現在在哪裡</button>
   </div>
   <div class="main">
     <router-outlet></router-outlet>

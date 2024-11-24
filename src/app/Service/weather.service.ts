@@ -10,10 +10,11 @@ export class WeatherService {
 
   constructor(private http: HttpClient) {}
 
-  async FetchWeather(city: string): Promise<void> {
+  async FetchWeather(position: any): Promise<void> {
     const apiKey = 'b7bdb04cbc84a42d90524c385e810a7a';
-    // const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=en`;
+    // const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=en`;
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.lat}&lon=${position.lng}&appid=${apiKey}&units=metric&lang=en`;
+
 
     try{
       const data = await lastValueFrom(this.http.get(apiUrl));

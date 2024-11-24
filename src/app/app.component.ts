@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet, RouterModule } from '@angular/router';
-import { WeatherService } from './weather.service';
 import { environment } from '../environments/environment';
+import { MapService } from './Service/map.service';
 
 @Component({
   selector: 'app-root',
@@ -12,31 +12,19 @@ import { environment } from '../environments/environment';
 })
 export class AppComponent {
   title = 'angular_capacitor_2';
-  city: string = 'Tainan';
-  apiLoaded: Promise<boolean>;
+  currentLat!: number;
+  currentLng!: number;
 
-  // lat: number = 23.5354;
-  // lon: number = 120.5354;
-
-  constructor(private weatherSrv: WeatherService){
-    this.weatherSrv.FetchWeather(this.city);
-    this.apiLoaded = this.loadGoogleMapsApi();
+  constructor(
+    private mapSrv: MapService
+  ){
+    this.mapSrv.loadGoogleMapsApi(environment.googleMapsApiKey);
   }
 
-  loadGoogleMapsApi(): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      if (!document.getElementById('googleMapsScript')) {
-        const script = document.createElement('script');
-        script.id = 'googleMapsScript';
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.googleMapsApiKey}`;
-        script.async = true;
-        script.defer = true;
-        script.onload = () => resolve(true);
-        script.onerror = () => reject(false);
-        document.head.appendChild(script);
-      } else {
-        resolve(true);
-      }
+  ngOnInit(){
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.currentLat = position.coords.latitude;
+      this.currentLng = position.coords.longitude;      
     });
   }
 }
