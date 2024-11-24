@@ -45,11 +45,15 @@ export class GoogleMapComponent {
   }
 
   createCustomMarkerContent() {
-    const div = document.createElement('div');
-    div.style.backgroundColor = 'blue';
-    div.style.color = 'white';
-    div.style.padding = '10px';
-    div.innerText = '我在這兒';
-    return div;
+    const img = document.createElement('img');
+    // div.style.backgroundColor = 'blue';
+    // div.style.color = 'white';
+    // div.style.padding = '10px';
+    // div.innerText = '我在這兒';
+    img.src="../../assets/noah.png";
+    img.style.width="50px";
+    img.style.height="auto";
+
+    return img;
   }
 }
