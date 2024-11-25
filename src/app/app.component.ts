@@ -12,8 +12,6 @@ import { MapService } from './Service/map.service';
 })
 export class AppComponent {
   title = 'angular_capacitor_2';
-  currentLat!: number;
-  currentLng!: number;
 
   constructor(
     private mapSrv: MapService
@@ -21,10 +19,5 @@ export class AppComponent {
     this.mapSrv.loadGoogleMapsApi(environment.googleMapsApiKey);
   }
 
-  ngOnInit(){
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.currentLat = position.coords.latitude;
-      this.currentLng = position.coords.longitude;      
-    });
-  }
+  ngOnInit(){}
 }

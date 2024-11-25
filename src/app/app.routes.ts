@@ -5,6 +5,6 @@ import { FoodMapComponent } from './Page/food-map/food-map.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent},
-    { path: 'weather/:lat/:lng', component: WeatherComponent},
-    { path: 'foodmap/:lat/:lng', component: FoodMapComponent},
+    { path: 'weather', component: WeatherComponent},
+    { path: 'foodmap', component: FoodMapComponent},
 ];

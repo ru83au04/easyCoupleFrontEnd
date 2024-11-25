@@ -1,7 +1,4 @@
 <main>
-    <div>
-        <button class="get_location" id="getLocation">Get Location</button>
-    </div>
     <div class="map_container" *ngIf="loadMap">
         <app-google-map [currentLocation] = "currentLocation"></app-google-map>
     </div>

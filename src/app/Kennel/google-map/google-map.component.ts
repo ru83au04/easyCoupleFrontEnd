@@ -45,15 +45,18 @@ export class GoogleMapComponent {
   }
 
   createCustomMarkerContent() {
+    const div = document.createElement('div');
     const img = document.createElement('img');
-    // div.style.backgroundColor = 'blue';
-    // div.style.color = 'white';
-    // div.style.padding = '10px';
-    // div.innerText = '我在這兒';
-    img.src="../../assets/noah.png";
-    img.style.width="50px";
-    img.style.height="auto";
+    div.textContent = "U R Here";
+    div.style.display = "flex";
+    div.style.flexDirection = "column";
+    div.style.alignItems = "center";
+    div.style.color = "Blue";
+    img.src = "../../assets/noah.png";
+    img.style.width = "35px";
+    img.style.height = "auto";
+    div.appendChild(img);
 
-    return img;
+    return div;
   }
 }

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { WeatherService } from '../../Service/weather.service';
-import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -13,21 +12,16 @@ export class WeatherComponent {
   weather: any;
   sunrise!: string;
   sunset!: string;
-  lat!: string | null;
-  lng!: string | null;
 
   constructor(
-    private weatherSrv: WeatherService,
-    private route: ActivatedRoute,
-  ) {}
+    private weatherSrv: WeatherService) {}
 
   ngOnInit(): void {
-    this.lat = this.route.snapshot.paramMap.get('lat') || '0';
-    this.lng = this.route.snapshot.paramMap.get('lng') || '0';
-    
-    this.weatherSrv.FetchWeather({
-      lat: parseFloat(this.lat),
-      lng: parseFloat(this.lng)
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.weatherSrv.FetchWeather({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      });
     });
 
     this.weatherSrv.weather$.subscribe((data) => {
