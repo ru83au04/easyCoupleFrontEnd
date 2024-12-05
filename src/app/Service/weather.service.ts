@@ -15,7 +15,7 @@ export class WeatherService {
     // const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=en`;
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.lat}&lon=${position.lng}&appid=${apiKey}&units=metric&lang=en`;
 
-
+    
     try{
       const data = await lastValueFrom(this.http.get(apiUrl));
       this.weatherSubject.next(data);
