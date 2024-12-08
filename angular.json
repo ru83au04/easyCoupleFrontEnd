@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/angular_capacitor_2",
+            "outputPath": "../../express_backend/public",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
