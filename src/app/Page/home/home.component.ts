@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { GoogleMap, MapMarker } from '@angular/google-maps';
 import { TimecounterComponent } from '../../Kennel/timecounter/timecounter.component';
 import { NgIf } from '@angular/common';
-import { environment } from '../../../environments/environment';
  
 @Component({
   selector: 'app-home',
@@ -15,7 +14,6 @@ export class HomeComponent {
   center: any = null;
   zoom: number = 15;
   getLoc: boolean = true;
-  apiKey: string = environment.googleMapsApiKey;
 
   ngAfterViewInit(): void {
     

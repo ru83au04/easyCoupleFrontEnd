@@ -18,14 +18,23 @@ export class GoogleMapComponent {
 
   constructor(private googleMapService: MapService){}
 
+  ngOnInit(): void{
+    console.log("frontEnd ngOninit");
+    this.googleMapService.loadGoogleMap().then(() => {
+      // 當腳本加載完成後，初始化地圖
+      this.initMap();
+    }).catch((err) => {
+      console.error('Google Map 加載失敗', err);
+    });    
+  }
+
   ngAfterViewInit(): void{
-    this.googleMapService.loadGoogleMapsApi(environment.googleMapsApiKey)
-    .then(() => this.initMap())
-    .catch((err) => console.error('Google Maps 加載失敗', err));
+    
   }
 
   initMap(): void {
     // 確保地圖容器已經準備好
+    console.log("frontEnd initMap");
     const mapElement = this.mapContainer.nativeElement;
   
     // 初始化地圖

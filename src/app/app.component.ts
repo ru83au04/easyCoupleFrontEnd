@@ -13,11 +13,7 @@ import { MapService } from './Service/map.service';
 export class AppComponent {
   title = 'angular_capacitor_2';
 
-  constructor(
-    private mapSrv: MapService
-  ){
-    this.mapSrv.loadGoogleMapsApi(environment.googleMapsApiKey);
-  }
+  constructor(){ }
 
   ngOnInit(){}
 }

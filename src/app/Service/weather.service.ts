@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, lastValueFrom } from 'rxjs';
+
 @Injectable({
   providedIn: 'root',
 })
 export class WeatherService {
   private weatherSubject = new BehaviorSubject<any>(null); // 初始化時為空
   public weather$ = this.weatherSubject.asObservable();
+  rootUrl = 'https://easy-couple-life.onrender.com'
 
   constructor(private http: HttpClient) {}
 
   async FetchWeather(position: any): Promise<void> {
-    const apiKey = 'b7bdb04cbc84a42d90524c385e810a7a';
-    // const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=en`;
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.lat}&lon=${position.lng}&appid=${apiKey}&units=metric&lang=en`;
-
+    let params = new HttpParams().set('lat', position.lat).set('lon', position.lng);
     
     try{
-      const data = await lastValueFrom(this.http.get(apiUrl));
+      const response = this.http.get(`${this.rootUrl}/api/weather/local`, { params });
+      const data = await lastValueFrom(response);
       this.weatherSubject.next(data);
     }catch(error){
       console.error('Failed to fetch weather data: ', error);
