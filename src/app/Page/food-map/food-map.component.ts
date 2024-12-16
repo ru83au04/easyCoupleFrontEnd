@@ -19,7 +19,12 @@ export class FoodMapComponent {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       }
-      this.loadMap = true;
     });
+  }
+
+  ngAfterViewInit (){
+    setTimeout(() => {
+      this.loadMap = true;
+    }, 1000);
   }
 }
