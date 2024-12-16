@@ -16,16 +16,10 @@ export class GoogleMapComponent {
   
   @Input() currentLocation: any;
 
-  constructor(private googleMapService: MapService){}
+  constructor(){}
 
   ngOnInit(): void{
-    console.log("frontEnd ngOninit");
-    this.googleMapService.loadGoogleMap().then(() => {
-      // 當腳本加載完成後，初始化地圖
-      this.initMap();
-    }).catch((err) => {
-      console.error('Google Map 加載失敗', err);
-    });    
+    this.initMap();
   }
 
   ngAfterViewInit(): void{
