@@ -16,9 +16,10 @@ export class GoogleMapComponent {
   
   @Input() currentLocation: any;
 
-  constructor(private googleMapService: MapService){}
+  constructor(){}
 
-  ngOnInit(): void{  
+  ngOnInit(): void{
+    this.initMap();
   }
 
   ngAfterViewInit(): void{
