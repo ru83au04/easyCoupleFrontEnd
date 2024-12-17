@@ -16,6 +16,6 @@ export class AppComponent {
   constructor(private mapSrv: MapService){ }
 
   ngOnInit(){
-    this.mapSrv.loadGoogleMapsApi(environment.googleMapsApiKey)
+    // this.mapSrv.loadGoogleMapsApi(environment.googleMapsApiKey);
   }
 }

@@ -23,8 +23,8 @@ export class FoodMapComponent {
   }
 
   ngAfterViewInit (){
-    setTimeout(() => {
-      this.loadMap = true;
-    }, 1000);
+    // setTimeout(() => {
+    //   this.loadMap = true;
+    // }, 3000);
   }
 }

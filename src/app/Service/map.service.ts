@@ -29,6 +29,7 @@ export class MapService {
   // }
   
   loadGoogleMapsApi(apiKey: string): Promise<void> {
+    console.log("loadMap");
     return new Promise((resolve, reject) => {
       if(typeof google !== 'undefined' && google.maps){
         resolve();
@@ -40,7 +41,7 @@ export class MapService {
         script.defer = true;
         script.onload = () => resolve();
         script.onerror = () => reject();
-        document.head.appendChild(script);
+        document.body.appendChild(script);
       }else{
         resolve();
       }
