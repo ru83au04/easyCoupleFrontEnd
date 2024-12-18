@@ -85,4 +85,42 @@ export class FoodMapComponent {
 
     return div;
   }
+
+  createMark() {
+    const div = document.createElement('div');
+    div.style.display = "flex";
+    div.style.flexDirection = "column";
+    div.style.alignItems = "center";
+    div.style.color = "Blue";
+
+    return div;
+  }
+
+
+  async findFood(){
+    let foodResult: any;
+    foodResult = await this.mapSrv.findFood(this.currentLocation);
+    console.log("foodResult", foodResult);
+    this.addMarkersToMap(foodResult.places);
+    console.log("result", foodResult.places);
+  }
+
+  addMarkersToMap(places: any[]): Promise<void> {
+    return new Promise((resolve, reject) => {places.forEach((place) => {
+      if(places.length != 0){
+        const advancedMarkerView = new google.maps.marker.AdvancedMarkerElement({
+          map: this.map,
+          position: {
+            lat: place.geometry.location.lat,
+            lng: place.geometry.location.lng,
+          },
+          title: 'eat',
+          content: this.createMark(),
+        });
+        resolve()
+      }else{
+        reject("找不到餐廳");
+      }
+    });
+  })}
 }

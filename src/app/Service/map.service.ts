@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapService {
+  rootUrl = 'https://easy-couple-life.onrender.com'
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
   
   loadGoogleMapsApi(apiKey: string): Promise<void> {
     return new Promise((resolve, reject) => {
@@ -25,5 +27,21 @@ export class MapService {
         resolve();
       }
     });
+  }
+
+  async findFood(position: any): Promise<Object>{
+    let params = new HttpParams()
+    .set('lat', position.lat)
+    .set('lon', position.lng)
+    .set('radius', 2000);
+    // .set('type', "GasStation");
+    try{
+      const response = this.http.get(`${this.rootUrl}/api/google/food`, { params });
+      const data = await lastValueFrom(response);
+      return data;
+    }catch(error){
+      console.error('Failed to fetch weather data: ', error);
+      return {};
+    }
   }
 }
