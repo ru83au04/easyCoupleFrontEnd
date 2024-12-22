@@ -14,6 +14,7 @@ export class FoodMapComponent {
   currentLocation: any;
   @ViewChild('mapContainer', { static: false }) mapContainer!: ElementRef;
   map!: google.maps.Map;
+  resultMarks: any[] = [];
 
   constructor(private mapSrv: MapService){}
 
@@ -50,15 +51,16 @@ export class FoodMapComponent {
     });
   }
 
+  // 初始化地圖
   initMap(): void {
     // 確保地圖容器已經準備好
     const mapElement = this.mapContainer.nativeElement;
-  
+
     // 初始化地圖
     this.map = new google.maps.Map(mapElement, {
       mapId: environment.googleMapsId,
       center: { lat: this.currentLocation.lat, lng: this.currentLocation.lng }, // 初始化中心點
-      zoom: 18 // 設置地圖縮放等級
+      zoom: 18, // 設置地圖縮放等級
     });
   
     // 添加標註
@@ -69,7 +71,7 @@ export class FoodMapComponent {
       content: this.createCustomMarkerContent(),
     });
   }
-
+  // 建立使用者位置圖示放入地圖
   createCustomMarkerContent() {
     const div = document.createElement('div');
     const img = document.createElement('img');
@@ -85,42 +87,113 @@ export class FoodMapComponent {
 
     return div;
   }
-
-  createMark() {
+  // 建立搜尋結果圖示
+  createMark(displayName: string, type: searchType) {
     const div = document.createElement('div');
     div.style.display = "flex";
     div.style.flexDirection = "column";
     div.style.alignItems = "center";
-    div.style.color = "Blue";
+    div.style.color = "blue";
+
+    const text = document.createElement('span');
+    text.textContent = displayName; // 動態更新為地點名稱
+    text.style.fontWeight = 'bold';
+
+    const img = document.createElement('img');
+    switch(type){
+      case searchType.food:
+        img.src = "../../assets/food.png"; // 自定義圖示
+        break;
+      case searchType.trashCarPosition:
+        img.src = "../../assets/誰偷了垃圾桶.png";
+    }
+    img.style.width = '32px';
+    img.style.height = '32px';
+
+    div.appendChild(img);
+    div.appendChild(text);
 
     return div;
   }
+  // 搜尋結果圖示加入地圖
+  addMarkersToMap(places: any[], type: searchType): Promise<void> {
+    return new Promise((resolve, reject) => {
+      if (!places || places.length === 0) {
+        reject('找不到指定內容');
+        return;
+      }
+  
+      // 確保地圖已初始化
+      if (!this.map) {
+        reject('地圖尚未初始化');
+        return;
+      }
+  
+      let completedMarkers = 0; // 計算已完成的標記數量
+  
+      // 遍歷地點數據，創建標記
+      places.forEach((place) => {
+        let marker;
+        switch(type){
+          case searchType.food:
+            marker = new google.maps.marker.AdvancedMarkerElement({
+              map: this.map, // 將標記放置到現有地圖上
+              position: {
+                lat: place.location.latitude,
+                lng: place.location.longitude,
+              },
+              title: place.displayName.text, // 標示標題
+              content: this.createMark(place.displayName.text, 0), // 標示樣式
+            });
+            break;
+          case searchType.trashCarPosition:
+            marker = new google.maps.marker.AdvancedMarkerElement({
+              map: this.map, // 將標記放置到現有地圖上
+              position: {
+                lat: parseFloat(place.LATITUDE),
+                lng: parseFloat(place.LONGITUDE),
+              },
+              title: place.TIME, // 標示標題
+              content: this.createMark(place.TIME, 1), // 標示樣式
+            });
+            break;
+        }
+        
+        // 當標記完成後增加計數器
+        completedMarkers++;
 
-
+        this.resultMarks.push(marker);
+  
+        // 當所有標記完成後執行 resolve
+        if (completedMarkers === places.length) {
+          resolve();
+        }
+      });
+    }
+  );
+  }
+  // 清除地圖上的搜尋結果圖示
+  clearMarkers(){
+    this.resultMarks.forEach((mark) => mark.map = null);
+    this.resultMarks = [];
+  }
+  // 搜尋使用者附近的餐廳並標上圖示
   async findFood(){
     let foodResult: any;
     foodResult = await this.mapSrv.findFood(this.currentLocation);
-    console.log("foodResult", foodResult);
-    this.addMarkersToMap(foodResult.places);
-    console.log("result", foodResult.places);
+    await this.addMarkersToMap(foodResult, 0);
   }
+  // 搜尋垃圾車地點
+  async getCarRoute(){
+    let carId: any;
+    carId = await this.mapSrv.getCarRoute("安南15線");
+    console.log("carId", typeof carId, carId);
+    await this.addMarkersToMap(carId, 1);
+    return carId;
+  }
+}
 
-  addMarkersToMap(places: any[]): Promise<void> {
-    return new Promise((resolve, reject) => {places.forEach((place) => {
-      if(places.length != 0){
-        const advancedMarkerView = new google.maps.marker.AdvancedMarkerElement({
-          map: this.map,
-          position: {
-            lat: place.geometry.location.lat,
-            lng: place.geometry.location.lng,
-          },
-          title: 'eat',
-          content: this.createMark(),
-        });
-        resolve()
-      }else{
-        reject("找不到餐廳");
-      }
-    });
-  })}
+export enum searchType {
+  food = 0,
+  trashCarPosition = 1,
 }

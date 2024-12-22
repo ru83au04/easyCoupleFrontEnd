@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { lastValueFrom } from 'rxjs';
+import { firstValueFrom, last, lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -34,13 +34,24 @@ export class MapService {
     .set('lat', position.lat)
     .set('lon', position.lng)
     .set('radius', 2000);
-    // .set('type', "GasStation");
     try{
       const response = this.http.get(`${this.rootUrl}/api/google/food`, { params });
       const data = await lastValueFrom(response);
       return data;
-    }catch(error){
-      console.error('Failed to fetch weather data: ', error);
+    }catch(err){
+      console.error('Failed to fetch places data: ', err);
+      return {};
+    }
+  }
+
+  async getCarRoute(param: string): Promise<Object>{
+    let params = new HttpParams().set('position', param);
+    try{
+      const res = this.http.get(`${this.rootUrl}/api/google/carRouteid`, { params });
+      const data = await lastValueFrom(res);
+      return data;
+    }catch(err){
+      console.error('Failed to fetch places data: ', err);
       return {};
     }
   }
