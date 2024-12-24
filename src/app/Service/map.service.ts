@@ -10,6 +10,7 @@ export class MapService {
 
   constructor(private http: HttpClient) {}
   
+  // 將 Google Map使用的腳本動態建立並放入HTML中
   loadGoogleMapsApi(apiKey: string): Promise<void> {
     return new Promise((resolve, reject) => {
       if(typeof google !== 'undefined' && google.maps){
@@ -28,7 +29,7 @@ export class MapService {
       }
     });
   }
-
+  // 搜尋使用者所在地附近的餐廳
   async findFood(position: any): Promise<Object>{
     let params = new HttpParams()
     .set('lat', position.lat)
@@ -43,7 +44,7 @@ export class MapService {
       return {};
     }
   }
-
+  // 搜尋垃圾車地點 //TODO: 可能要刪除
   async getCarRoute(param: string): Promise<Object>{
     let params = new HttpParams().set('position', param);
     try{
@@ -53,6 +54,16 @@ export class MapService {
     }catch(err){
       console.error('Failed to fetch places data: ', err);
       return {};
+    }
+  }
+  async getAreaList(): Promise<{area: string}[]>{
+    try{
+      const res = this.http.get<{area: string}[]>(`${this.rootUrl}/api/google/areaList`);
+      const areas = await lastValueFrom(res);
+      return areas;
+    }catch(err){
+      console.error('Failed to fetch places data: ', err);
+      return [];
     }
   }
 }

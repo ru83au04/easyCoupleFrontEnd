@@ -1,12 +1,13 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NgIf, NgStyle } from '@angular/common';
+import { NgIf, NgStyle, NgFor } from '@angular/common';
 import { MapService } from '../../Service/map.service';
 import { environment } from '../../../environments/environment';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-food-map',
   standalone: true,
-  imports: [NgIf, NgStyle],
+  imports: [NgIf, NgStyle, FormsModule, NgFor],
   templateUrl: './food-map.component.html',
   styleUrl: './food-map.component.css'
 })
@@ -15,11 +16,14 @@ export class FoodMapComponent {
   @ViewChild('mapContainer', { static: false }) mapContainer!: ElementRef;
   map!: google.maps.Map;
   resultMarks: any[] = [];
+  areas?: {area: string}[];
+  selectedArea: string = "";
 
   constructor(private mapSrv: MapService){}
 
   
   ngOnInit(){
+    this.setArea();
   }
 
   ngAfterViewInit (){
@@ -177,19 +181,23 @@ export class FoodMapComponent {
     this.resultMarks.forEach((mark) => mark.map = null);
     this.resultMarks = [];
   }
-  // 搜尋使用者附近的餐廳並標上圖示
+  // 搜尋使用者附近的餐廳
   async findFood(){
     let foodResult: any;
     foodResult = await this.mapSrv.findFood(this.currentLocation);
     await this.addMarkersToMap(foodResult, 0);
   }
-  // 搜尋垃圾車地點
+  // 搜尋垃圾車地點 //TODO:可能要替換掉
   async getCarRoute(){
     let carId: any;
     carId = await this.mapSrv.getCarRoute("安南15線");
-    console.log("carId", typeof carId, carId);
     await this.addMarkersToMap(carId, 1);
     return carId;
+  }
+
+  async setArea(){
+    this.areas = await this.mapSrv.getAreaList();
+    console.log("areas", this.areas);
   }
 }
 
