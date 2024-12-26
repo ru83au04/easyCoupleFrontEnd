@@ -23,7 +23,7 @@ export class FoodMapComponent {
 
   
   ngOnInit(){
-    this.setArea();
+    this.setAreaList();
   }
 
   ngAfterViewInit (){
@@ -195,9 +195,14 @@ export class FoodMapComponent {
     return carId;
   }
 
-  async setArea(){
+  async setAreaList(){
     this.areas = await this.mapSrv.getAreaList();
-    console.log("areas", this.areas);
+  }
+
+  async choiceArea(area: string){
+    let resultArea = await this.mapSrv.searchByArea(area);
+    // this.addMarkersToMap(resultArea, 1);
+    console.log("area choice", resultArea);
   }
 }
 

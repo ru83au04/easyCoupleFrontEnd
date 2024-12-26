@@ -44,6 +44,29 @@ export class MapService {
       return {};
     }
   }
+  // 取得行政區列表
+  async getAreaList(): Promise<{area: string}[]>{
+    try{
+      const res = this.http.get<{area: string}[]>(`${this.rootUrl}/api/google/areaList`);
+      const areas = await lastValueFrom(res);
+      return areas;
+    }catch(err){
+      console.error('Failed to fetch places data: ', err);
+      return [];
+    }
+  }
+  // 搜尋選定行政區內的所有地點
+  async searchByArea(area: string): Promise<Object>{
+    try{
+      let params = new HttpParams().set('area', area);
+      const res = this.http.get(`${this.rootUrl}/api/google/searchByArea`, { params });
+      const areaPosition = await lastValueFrom(res);
+      return areaPosition;
+    }catch(err){
+      console.error('Failed to fetch places data: ', err);
+      return {};
+    }
+  }
   // 搜尋垃圾車地點 //TODO: 可能要刪除
   async getCarRoute(param: string): Promise<Object>{
     let params = new HttpParams().set('position', param);
@@ -54,16 +77,6 @@ export class MapService {
     }catch(err){
       console.error('Failed to fetch places data: ', err);
       return {};
-    }
-  }
-  async getAreaList(): Promise<{area: string}[]>{
-    try{
-      const res = this.http.get<{area: string}[]>(`${this.rootUrl}/api/google/areaList`);
-      const areas = await lastValueFrom(res);
-      return areas;
-    }catch(err){
-      console.error('Failed to fetch places data: ', err);
-      return [];
     }
   }
 }
