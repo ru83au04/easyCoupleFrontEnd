@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { firstValueFrom, last, lastValueFrom } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -56,27 +56,27 @@ export class MapService {
     }
   }
   // 搜尋選定行政區內的所有地點
-  async searchByArea(area: string): Promise<Object>{
+  async searchByArea(area: string): Promise<Object[]>{
     try{
       let params = new HttpParams().set('area', area);
-      const res = this.http.get(`${this.rootUrl}/api/google/searchByArea`, { params });
+      const res = this.http.get<Object[]>(`${this.rootUrl}/api/google/searchByArea`, { params });
       const areaPosition = await lastValueFrom(res);
       return areaPosition;
     }catch(err){
       console.error('Failed to fetch places data: ', err);
-      return {};
+      return [];
     }
   }
-  // 搜尋垃圾車地點 //TODO: 可能要刪除
-  async getCarRoute(param: string): Promise<Object>{
-    let params = new HttpParams().set('position', param);
+  // 搜尋選定區域與時間段內的所有地點
+  async searchByAreaAndTime(area: string, time: string): Promise<Object[]>{
     try{
-      const res = this.http.get(`${this.rootUrl}/api/google/carRouteid`, { params });
-      const data = await lastValueFrom(res);
-      return data;
+      let params = new HttpParams().set('area', area).set('time', time);
+      const res = this.http.get<Object[]>(`${this.rootUrl}/api/google/searchByAreaAndTime`, { params });
+      const areaPosition = await lastValueFrom(res);
+      return areaPosition;
     }catch(err){
       console.error('Failed to fetch places data: ', err);
-      return {};
+      return [];
     }
   }
 }

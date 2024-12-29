@@ -17,13 +17,16 @@ export class FoodMapComponent {
   map!: google.maps.Map;
   resultMarks: any[] = [];
   areas?: {area: string}[];
+  timeList: string[] = [];
   selectedArea: string = "";
+  selectedTIme: string = "";
 
   constructor(private mapSrv: MapService){}
 
   
   ngOnInit(){
     this.setAreaList();
+    this.setTimeList();
   }
 
   ngAfterViewInit (){
@@ -154,11 +157,11 @@ export class FoodMapComponent {
             marker = new google.maps.marker.AdvancedMarkerElement({
               map: this.map, // 將標記放置到現有地圖上
               position: {
-                lat: parseFloat(place.LATITUDE),
-                lng: parseFloat(place.LONGITUDE),
+                lat: parseFloat(place.latitude),
+                lng: parseFloat(place.longitude),
               },
-              title: place.TIME, // 標示標題
-              content: this.createMark(place.TIME, 1), // 標示樣式
+              title: place.time, // 標示標題
+              content: this.createMark(place.time, 1), // 標示樣式
             });
             break;
         }
@@ -187,22 +190,33 @@ export class FoodMapComponent {
     foodResult = await this.mapSrv.findFood(this.currentLocation);
     await this.addMarkersToMap(foodResult, 0);
   }
-  // 搜尋垃圾車地點 //TODO:可能要替換掉
-  async getCarRoute(){
-    let carId: any;
-    carId = await this.mapSrv.getCarRoute("安南15線");
-    await this.addMarkersToMap(carId, 1);
-    return carId;
-  }
-
+  // 建立行政區清單(做為選項清單，所以結果不重複)
   async setAreaList(){
     this.areas = await this.mapSrv.getAreaList();
   }
-
+  // 建立時間選項清單
+  setTimeList(){
+    for(let h = 0; h < 24; h++){
+      const hour = h.toString().padStart(2, '0');
+      this.timeList.push(`${hour}:00`, `${hour}:30`);
+    }
+  }
+  // 選定 AREA後，將該區域內所有清運地點標示在地圖上
   async choiceArea(area: string){
     let resultArea = await this.mapSrv.searchByArea(area);
-    // this.addMarkersToMap(resultArea, 1);
-    console.log("area choice", resultArea);
+    this.addMarkersToMap(resultArea, 1);
+  }
+  // 選定 AREA與 Time之後搜尋並建立地標
+  async search(area: string, time: string){
+    if(this.resultMarks.length > 0){
+      this.clearMarkers();
+    }
+    if(area === "" || time === ""){
+      console.log("時間或地點不得為空");
+      return;
+    }
+    let resultArea = await this.mapSrv.searchByAreaAndTime(area, time);
+    this.addMarkersToMap(resultArea, 1);
   }
 }
 
