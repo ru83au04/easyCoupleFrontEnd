@@ -1,21 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, ViewEncapsulation  } from '@angular/core';
 import { GoogleMap, MapMarker } from '@angular/google-maps';
-import { TimecounterComponent } from '../../Kennel/timecounter/timecounter.component';
-import { NgIf } from '@angular/common';
+import { NgIf, NgClass } from '@angular/common';
  
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgIf, GoogleMap, MapMarker, TimecounterComponent],
+  imports: [NgIf, NgClass, GoogleMap, MapMarker],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css'],
+  encapsulation: ViewEncapsulation.None  // 禁用樣式封裝
 })
 export class HomeComponent {
-  center: any = null;
-  zoom: number = 15;
-  getLoc: boolean = true;
+  oneReady = false;
+  twoReady = false;
 
-  ngAfterViewInit(): void {
-    
+  @HostListener('animationend', ['$event']) animationEnd(event: AnimationEvent){
+    switch(event.animationName){
+      case "line-one-fade-in":
+        this.oneReady = true;
+        break;
+      case "line-two-fade-in":
+        this.twoReady = true;
+        break;
+      default:
+        break;
+    }
   }
+
 }

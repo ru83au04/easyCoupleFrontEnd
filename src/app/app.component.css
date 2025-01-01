@@ -5,8 +5,8 @@ button {
     border: 2px solid #d2a679; /* 使用金屬感的邊框色 */
     border-radius: 8px; /* 輕微圓角，使按鈕有更自然的外觀 */
     padding: 10px 20px;
-    font-size: 1.1em;
-    margin: 10px;
+    font-size: 1.1rem;
+    margin: 8px;
     cursor: pointer;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.6); /* 立體感的陰影效果 */
     text-transform: uppercase; /* 全部字母大寫，使按鈕更具冒險感 */

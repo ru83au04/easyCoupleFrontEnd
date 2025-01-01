@@ -87,8 +87,8 @@ export class FoodMapComponent {
     div.style.flexDirection = "column";
     div.style.alignItems = "center";
     div.style.color = "Blue";
-    img.src = "../../assets/noah.png";
-    img.style.width = "35px";
+    img.src = "../../assets/person.png";
+    img.style.width = "70px";
     img.style.height = "auto";
     div.appendChild(img);
 
@@ -114,8 +114,8 @@ export class FoodMapComponent {
       case searchType.trashCarPosition:
         img.src = "../../assets/誰偷了垃圾桶.png";
     }
-    img.style.width = '32px';
-    img.style.height = '32px';
+    img.style.width = '50px';
+    img.style.height = '50px';
 
     div.appendChild(img);
     div.appendChild(text);
@@ -201,11 +201,6 @@ export class FoodMapComponent {
       this.timeList.push(`${hour}:00`, `${hour}:30`);
     }
   }
-  // 選定 AREA後，將該區域內所有清運地點標示在地圖上
-  async choiceArea(area: string){
-    let resultArea = await this.mapSrv.searchByArea(area);
-    this.addMarkersToMap(resultArea, 1);
-  }
   // 選定 AREA與 Time之後搜尋並建立地標
   async search(area: string, time: string){
     if(this.resultMarks.length > 0){
@@ -216,6 +211,11 @@ export class FoodMapComponent {
       return;
     }
     let resultArea = await this.mapSrv.searchByAreaAndTime(area, time);
+    this.addMarkersToMap(resultArea, 1);
+  }
+  // 選定 AREA後，將該區域內所有清運地點標示在地圖上
+  async choiceArea(area: string){
+    let resultArea = await this.mapSrv.searchByArea(area);
     this.addMarkersToMap(resultArea, 1);
   }
 }

@@ -1,0 +1,72 @@
+/* 定義漸變顯示的動畫 */
+@keyframes line-one-fade-in {
+    0% {
+        opacity: 0;
+        transform: translate(-20px, -20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes line-two-fade-in {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes line-three-fade-in {
+    0% {
+        opacity: 0;
+        transform: translate(20px, 20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* 最終位置為正常 */
+    }
+}
+
+.line {
+    font-size: 10rem;
+    font-weight: bold;
+    visibility: hidden;
+}
+
+.line-one {
+    visibility: visible;
+    color: #000;
+    animation: line-one-fade-in 1.5s ease-in-out;
+}
+
+.line-two {
+    visibility: visible;
+    color: #000;
+    animation: line-two-fade-in 3s ease-in-out;
+    text-align: center;
+}
+
+.line-three {
+    visibility: visible;
+    color: #000;
+    animation: line-three-fade-in 2s ease-in-out;
+    text-align: end;
+}
+
+@media (max-width: 850px) and (min-width: 320px){
+    .line{
+        font-size: 5rem;
+    }
+}
+
+@media (max-width: 450px){
+    .line{
+        font-size: 3rem;
+    }
+}
+
