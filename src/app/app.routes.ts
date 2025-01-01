@@ -5,6 +5,7 @@ import { FoodMapComponent } from './Page/food-map/food-map.component';
 import { SignInComponent } from './Page/sign-in/sign-in.component';
 import { ExternalComponent } from './Page/external/external.component';
 import { BlogComponent } from './Page/blog/blog.component';
+import { AboutComponent } from './Page/about/about.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent},
@@ -13,4 +14,5 @@ export const routes: Routes = [
     { path: 'signin', component: SignInComponent},
     { path: 'external/:path', component: ExternalComponent},
     { path: 'blog', component: BlogComponent},
+    { path: 'about', component: AboutComponent},
 ];

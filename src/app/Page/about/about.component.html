@@ -1,1 +1,17 @@
-<p>about works!</p>
+<main>
+    <div class="out-zone">
+        <div class="about-zone">
+            <div class="about-title">
+                關於我
+            </div>
+            <div class="about-article">
+                <p class="line" *ngFor="let line of forFrontEnd">
+                    {{ line }}
+                </p>
+            </div>
+        </div>
+        <div class="img-zone">
+            <img src="../../../assets/myself.jpg">
+        </div>
+    </div>
+</main>

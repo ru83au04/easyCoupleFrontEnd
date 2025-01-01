@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterOutlet, RouterModule } from '@angular/router';
-import { environment } from '../environments/environment';
 import { MapService } from './Service/map.service';
 
 @Component({
