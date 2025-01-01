@@ -1,11 +1,24 @@
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translate(20px, 20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0); /* 最終位置為正常 */
+    }
+}
+
+main{
+    animation: fadeIn 1.5s ease-in-out;
+}
 .out-zone{
     display: flex;
-    /* flex-direction: column; */
 }
 .img-zone{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
     width: 50%;
 }
 .about-zone{  
@@ -13,6 +26,8 @@
     flex-direction: column;
     align-items: center;
     width: 50%;
+    margin-top: 50px;
+    margin-left: 100px;
 }
 
 
@@ -20,4 +35,5 @@ img{
     height: 400px;
     border-radius: 50px;
     border-color: blue;
+    margin-top: 100px;
 }

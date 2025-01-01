@@ -1,6 +1,6 @@
 <div>
   <div class="button_container">
-    <button routerLink="">首頁</button>
+    <button [routerLink]="['']" [queryParams]="{ notFirst: true}">首頁</button>
     <button routerLink="/blog">Blog</button>
     <button routerLink="/project">作品</button>
     <button routerLink="/about">關於</button>

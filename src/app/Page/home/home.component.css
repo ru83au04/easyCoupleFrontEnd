@@ -2,11 +2,10 @@
 @keyframes line-one-fade-in {
     0% {
         opacity: 0;
-        transform: translate(-20px, -20px);
+        transform: translate(20px, -20px);
     }
     100% {
         opacity: 1;
-        transform: translateY(0);
     }
 }
 
@@ -28,8 +27,22 @@
     }
     100% {
         opacity: 1;
-        transform: translateY(0); /* 最終位置為正常 */
     }
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-20px, -20px);
+    }
+}
+
+.main-fade-out{
+    animation: fade-out 1s ease-in-out;
+    visibility: hidden;
 }
 
 .line {
@@ -42,6 +55,8 @@
     visibility: visible;
     color: #000;
     animation: line-one-fade-in 1.5s ease-in-out;
+    text-align: center;
+    margin-right: 200px;
 }
 
 .line-two {
@@ -55,12 +70,19 @@
     visibility: visible;
     color: #000;
     animation: line-three-fade-in 2s ease-in-out;
-    text-align: end;
+    text-align: center;
+    margin-left: 300px
 }
 
-@media (max-width: 850px) and (min-width: 320px){
+@media (max-width: 1100px) and (min-width: 320px){
     .line{
         font-size: 5rem;
+    }
+    .line-one{
+        margin-right: 0px;
+    }
+    .line-three{
+        margin-left: 0px;
     }
 }
 
