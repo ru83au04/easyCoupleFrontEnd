@@ -15,12 +15,7 @@ main{
 .out-zone{
     display: flex;
 }
-.img-zone{
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    width: 50%;
-}
+
 .about-zone{  
     display: flex;
     flex-direction: column;
@@ -30,6 +25,27 @@ main{
     margin-left: 100px;
 }
 
+.about-title{
+    font-size: 2rem;
+}
+
+.about-article{   
+    background-image: url("../../../assets/centered_kraft_paper_texture.png");
+    padding: 10px;
+    border-radius: 50px;
+}
+
+.line {
+    background-image: linear-gradient(to top, transparent, rgba(255, 255, 255, 0.555));
+    font-size: 16px;
+}
+
+.img-zone{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+}
 
 img{
     height: 400px;

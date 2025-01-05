@@ -46,7 +46,7 @@
 }
 
 .line {
-    font-size: 10rem;
+    font-size: 5.8rem;
     font-weight: bold;
     visibility: hidden;
 }
@@ -74,7 +74,7 @@
     margin-left: 300px
 }
 
-@media (max-width: 1100px) and (min-width: 320px){
+@media (max-width: 1200px){
     .line{
         font-size: 5rem;
     }
@@ -86,7 +86,7 @@
     }
 }
 
-@media (max-width: 450px){
+@media (max-width: 530px){
     .line{
         font-size: 3rem;
     }

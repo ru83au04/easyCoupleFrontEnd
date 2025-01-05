@@ -1,11 +1,28 @@
 <div>
-  <div class="button_container">
-    <button [routerLink]="['']" [queryParams]="{ notFirst: true}">首頁</button>
-    <button routerLink="/blog">Blog</button>
-    <button routerLink="/project">作品</button>
-    <button routerLink="/about">關於</button>
-    <!-- <button routerLink="/weather">現在天氣</button> -->
-    <!-- <button routerLink="/signin">簽到</button> -->
+  <div class="head">
+    <div class="head-title">
+      <div class="name-size en-name" [routerLink]="['']" [queryParams]="{ notFirst: true}">
+        <div class="name-start">
+          N
+        </div>
+        <div>
+          <div class="en-name-size first-name">
+            oah
+          </div>
+          <div class="en-name-size last-name">
+            Wang
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="button-container">
+      <button [routerLink]="['']" [queryParams]="{ notFirst: true}">首頁</button>
+      <button routerLink="/blog">Blog</button>
+      <button routerLink="/project">作品</button>
+      <button routerLink="/about">關於</button>
+      <!-- <button routerLink="/weather">現在天氣</button> -->
+      <!-- <button routerLink="/signin">簽到</button> -->
+    </div>    
   </div>
   <div class="main">
     <router-outlet></router-outlet>
