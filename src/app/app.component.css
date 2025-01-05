@@ -1,5 +1,4 @@
 button {
-    font-family: 'Cinzel', serif; 
     background: none;
     border-radius: 8px;
     border: 0px;
@@ -26,8 +25,7 @@ button:active {
 
 .head{
     display: flex;
-    justify-content: center;
-    padding: 30px;
+    padding: 5px;
 }
 
 .name-size{
@@ -60,9 +58,10 @@ button:active {
 
 /* 讓按鈕在水平方向上排列在一起 */
 .button-container {
+    width: 100%;
     display: flex;
-    justify-content: center;
-    gap: 150px;
+    justify-content: space-evenly;
+    gap: 120px;
     margin: 20px;
 }
 
@@ -74,10 +73,13 @@ button:active {
         font-size: 1.5rem;
     }
     .button-container {
-        gap: 50px;
-    }    
+        gap: 60px;
+        margin: 10px
+    }   
     button {
-        font-size: 1rem;
+        margin: 0px;
+        padding: 2px;
+        font-size: 2rem;
     }
 }
 
@@ -89,12 +91,13 @@ button:active {
         font-size: 1rem;
     }
     .button-container {
-        gap: 5px;
+        gap: 10px;
         margin: 10px
     }   
     button {
         margin: 0px;
-        font-size: 0.8rem;
+        padding: 2px;
+        font-size: 1.5rem;
     }
 }
 
