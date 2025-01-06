@@ -14,6 +14,5 @@ export class AppComponent {
 
   constructor(private mapSrv: MapService){ }
 
-  ngOnInit(){
-  }
+  ngOnInit() {}
 }

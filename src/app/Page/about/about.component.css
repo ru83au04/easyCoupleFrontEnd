@@ -27,15 +27,16 @@ main{
 
 .about-title{
     font-size: 2rem;
+    color: rgb(244, 228, 198);
 }
 
 .about-article{   
     padding: 10px;
     border-radius: 50px;
+    color: rgb(244, 228, 198);
 }
 
 .line {
-    background-image: linear-gradient(to right, transparent, rgba(163, 218, 233, 0.906));
     font-size: 16px;
     border-radius: 10px;
 }
@@ -53,3 +54,26 @@ img{
     border-color: blue;
     margin-top: 100px;
 }
+
+@media (max-width: 1200px) {
+    .img-zone{
+        z-index: -1;
+        width: 100%;
+        position: absolute;
+        filter: blur(30px);
+    }
+    .about-zone{
+        margin: 0px;
+        margin-top: 100px;
+        width: 100%;
+    }
+    .about-article{
+        width: 70%;
+    }
+}
+
+@media (max-width: 530px) {
+
+}
+
+@media (max-width: 320px) {}
