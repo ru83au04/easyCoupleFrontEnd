@@ -26,6 +26,7 @@ button:active {
 .head{
     display: flex;
     padding: 5px;
+    max-height: fit-content;
 }
 
 .name-size{
