@@ -6,83 +6,29 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    border: solid 5px rgba(2, 99, 216, 0.486);
+    border-radius: 10px;
+    padding: 5px;
 }
 
 .outbox > div:first-child {
     font-size: 1em;
     font-weight: bold;
-    color: #f7d794; /* 金色的文字顏色以呼應狩獵的感覺 */
-    text-shadow: 2px 2px 8px #000; /* 文字陰影，使其更突出 */
-    border-bottom: 2px solid #7f5c37; /* 底部加一條金屬感的線條，增強質感 */
-    padding-bottom: 10px;
-    margin-bottom: 15px;
 }
 
 .countdown {
     display: flex;
-    justify-content: center;
-    align-items: center;
     gap: 20px;
-    font-family: Arial, sans-serif;
     display: flex;
-    gap: 20px; /* 每個時間框之間的間隔 */
-    padding: 20px;
-    background: #1b1b1b; /* 深色背景來襯托時間框 */
-    border: 2px solid #4b3621; /* 金屬風邊框 */
-    border-radius: 15px; /* 圓角，增加質感 */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), inset 0 0 10px #4b3621; /* 外部陰影和內部陰影，增強立體效果 */
-}
-
-.time_box {
-    text-align:  center;
-    background: #3d2b1f; /* 深棕色，模擬木板或石頭的顏色 */
-    padding: 20px;
-    border: 2px solid #7f5c37; /* 較亮的棕色邊框來模擬石頭或木材的邊緣 */
-    border-radius: 10px; /* 圓角來使它看起來更自然 */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6); /* 陰影來增加厚重感 */
-    text-align: center;
-    position: relative;
+    gap: 10px;
+    padding: 10px;
 }
 
 .time {
     font-size: 1em;
     font-weight: bold;
-    color: #f0e6d2; /* 類似骨頭的顏色 */
-    text-shadow: 0 2px 5px #000; /* 微妙的陰影來突出文字 */
 }
 
-.label {
-    display: block;
-    font-size: 1em;
-    margin-top: 5px;
-}
-
-.image_adjust{
-    align-items: center;
-}
-
-/* 圖片樣式 */
-.image_adjust {
-    margin-top: 20px;
-    max-width: 100vw;
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    border: 5px solid #7f5c37; /* 圖片邊框，與時間框一致 */
-    background-color: #7f5c37;
-    border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7); /* 增加圖片的立體效果 */
-}
-
-.image_itself{
-    width: 100%;
-    height: auto;
-}
-
-@media screen and (max-width: 768px){
-    img{
-        height: auto;
-        width: 90%;
-    }    
+@media (max-width: 768px){
+     
 }

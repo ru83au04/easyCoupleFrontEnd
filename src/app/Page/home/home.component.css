@@ -72,8 +72,12 @@
 }
 
 .timer{
-    height: 200px;
-    width: 500px;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
 }
 
 @media (max-width: 1200px){

@@ -26,14 +26,12 @@ main{
 
 .about-title{
     font-size: 2rem;
-    color: rgb(244, 228, 198);
 }
 
 .about-article{   
     padding: 10px;
     border-radius: 50px;
     width: 50%;
-    color: rgb(244, 228, 198);
 }
 
 .line {

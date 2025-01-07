@@ -17,8 +17,8 @@ export class HomeComponent {
   twoReady = false;
   goToAbout = false;
   firstVisit!: boolean;
-  learningTime = { title: "開始學習 Coding累計至今", targetDate: new Date('2023/01/01'), plus: true }
-  careerTime = { title: "從事前端工程師工作累計至今", targetDate: new Date('2024/04/08'), plus: true }
+  learningTime = { title: "學習 Coding累計至今", targetDate: new Date('2023/01/01'), plus: true }
+  careerTime = { title: "從事前端工作累計至今", targetDate: new Date('2024/04/08'), plus: true }
 
   constructor(private router: Router, private active: ActivatedRoute){}
 
