@@ -2,4 +2,8 @@
     <div class="line line-one">Welcome to</div>
     <div class="line" [ngClass]="{'line-two': oneReady}">Noah's</div>
     <div class="line" [ngClass]="{'line-three': oneReady}">Easy Life</div>
+    <div class="timer">
+        <app-timecounter [inputData]="learningTime"></app-timecounter>
+        <app-timecounter [inputData]="careerTime"></app-timecounter>
+    </div>
 </main>

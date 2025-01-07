@@ -9,7 +9,7 @@
 }
 
 .outbox > div:first-child {
-    font-size: 2em;
+    font-size: 1em;
     font-weight: bold;
     color: #f7d794; /* 金色的文字顏色以呼應狩獵的感覺 */
     text-shadow: 2px 2px 8px #000; /* 文字陰影，使其更突出 */
@@ -45,7 +45,7 @@
 }
 
 .time {
-    font-size: 2em;
+    font-size: 1em;
     font-weight: bold;
     color: #f0e6d2; /* 類似骨頭的顏色 */
     text-shadow: 0 2px 5px #000; /* 微妙的陰影來突出文字 */

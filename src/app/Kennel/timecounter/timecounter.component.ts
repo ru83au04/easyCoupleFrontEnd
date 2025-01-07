@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { interval, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -10,11 +10,11 @@ import { takeUntil } from 'rxjs/operators';
   styleUrl: './timecounter.component.css'
 })
 export class TimecounterComponent {
-  releaseDate = new Date('2025-02-28');
   days: number = 0;
   hours: number = 0;
   min: number = 0;
   sec: number = 0;
+  @Input() inputData!: { title: string, targetDate: Date, plus: boolean };
 
   private destroy$ = new Subject<void>();
 
@@ -31,7 +31,12 @@ export class TimecounterComponent {
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         const currentTime = new Date().getTime();
-        const distance = this.releaseDate.getTime() - currentTime;
+        let distance = 0
+        if (this.inputData.plus) {
+          distance = currentTime - this.inputData.targetDate.getTime();
+        } else {
+          distance = this.inputData.targetDate.getTime() - currentTime;
+        }
 
         if (distance > 0) {
           this.days = Math.floor(distance / (1000 * 60 * 60 * 24));

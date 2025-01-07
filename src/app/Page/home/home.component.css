@@ -53,7 +53,6 @@
 
 .line-one {
     visibility: visible;
-    color: #000;
     animation: line-one-fade-in 1.5s ease-in-out;
     text-align: center;
     margin-right: 200px;
@@ -61,17 +60,20 @@
 
 .line-two {
     visibility: visible;
-    color: #000;
     animation: line-two-fade-in 3s ease-in-out;
     text-align: center;
 }
 
 .line-three {
     visibility: visible;
-    color: #000;
     animation: line-three-fade-in 2s ease-in-out;
     text-align: center;
     margin-left: 300px
+}
+
+.timer{
+    height: 200px;
+    width: 500px;
 }
 
 @media (max-width: 1200px){
