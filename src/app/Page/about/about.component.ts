@@ -9,6 +9,7 @@ import { NgFor } from '@angular/common';
   styleUrl: './about.component.css'
 })
 export class AboutComponent {
+  // [ ]:替換成我們要的文章內容
   // article: string = `
   //   這邊除了記錄成為全端工程式的心路歷程外，
   //   也會分享學習過程中的紀錄，也要向數位游牧夥伴們打聲招呼，
