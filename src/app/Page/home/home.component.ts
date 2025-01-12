@@ -1,13 +1,12 @@
 import { Component, HostListener, ViewEncapsulation } from '@angular/core';
-import { GoogleMap, MapMarker } from '@angular/google-maps';
-import { NgIf, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TimecounterComponent } from '../../Kennel/timecounter/timecounter.component';
  
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgIf, NgClass, GoogleMap, MapMarker, TimecounterComponent],
+  imports: [ NgClass, TimecounterComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   encapsulation: ViewEncapsulation.None  // 禁用樣式封裝
