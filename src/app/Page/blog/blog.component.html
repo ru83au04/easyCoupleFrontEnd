@@ -1,4 +1,6 @@
-<main>
+<main style="display: flex; flex-direction: column; overflow: hidden;">
     <div id="outer"></div>
-    <div id="articleTxt"></div>
+    <div *ngIf="articleOpen">
+        <app-article [article]="content" (closeArticle)="closeArticle()"></app-article>
+    </div>
 </main>
