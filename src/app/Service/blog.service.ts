@@ -8,30 +8,46 @@ import { lastValueFrom } from 'rxjs';
 export class BlogService {
   articles: article[] = [];
 
-  constructor(private http: HttpClient) { }
-  
-  async getArticleList(): Promise<string[]> {
-    let res = await lastValueFrom(this.http.get<wordpressRes>('https://public-api.wordpress.com/rest/v1.1/sites/ru83au04.wordpress.com/posts/'));
-    let articles = res.posts;
-    return articles.map((art) => {
-      this.articles.push(art);
-      return art.title;
-    });
+  constructor(private http: HttpClient) { 
   }
-  getArticle(title: string): string{
+
+  async getArticles(): Promise<article[]> {
+    try {
+      let res = await lastValueFrom(this.http.get<wordpressRes>('https://public-api.wordpress.com/rest/v1.1/sites/ru83au04.wordpress.com/posts/'));
+      this.articles = res.posts;
+      return this.articles
+    } catch(err) {
+      console.error(err);
+      return [];
+    }
+  }
+  getContent(title: string): string{
     const article = this.articles.find((art) => {
       return art.title === title;
     });
     return article?.content || '';
+  }
+  getTitleList(): string[]{
+    return this.articles.map((art) => {
+      return art.title;
+    })
   }
 }
 
 interface wordpressRes{
   posts: article[],
 }
-interface article { 
+export interface article { 
   ID: number,
-  author: object,
+  author: {
+    name: string,
+    firsrt_name: string,
+    last_name: string,
+    login: string,
+  },
+  date: string,
+  modified: string,
   title: string,
   content: string,
+  excerpt: string,
 }

@@ -1,0 +1,41 @@
+#guidblock {
+    background-color: rgb(110, 68, 12);
+    border-radius: 25px;
+    width: 100%;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-align: center;
+    padding: 10px;
+    margin: 30px;
+}
+
+#title {
+    margin-top: 10px;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+#excerpt {
+    flex-grow: 1;
+    display: flex;
+    text-align: left;
+    font-size: 1.5rem;
+    padding: 20px;
+}
+
+#author {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+}
+
+#name {
+    text-align: left;
+}
+
+#date {
+    text-align: right;
+}

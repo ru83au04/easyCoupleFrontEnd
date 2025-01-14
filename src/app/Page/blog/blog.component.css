@@ -1,10 +1,9 @@
-.title{
-    /* TODO: 設定標題列表的格式 */
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+#articles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(1fr, 1fr));
+  gap: 1rem;
+  /* 設置網格項之間的間距 */
 }
-
-.title:hover {
-    background-color: #f0f0f0;
-    color: #333;
+app-guidblock{
+  width: 33%;
 }

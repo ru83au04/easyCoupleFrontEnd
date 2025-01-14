@@ -1,5 +1,7 @@
-<main style="display: flex; flex-direction: column; overflow: hidden;">
-    <div id="titleList"></div>
+<main>
+    <div id="articles">
+        <app-guidblock *ngFor="let article of articles" [article]="article"></app-guidblock>
+    </div>
     <div *ngIf="articleOpen">
         <app-article [article]="content" (closeArticle)="closeArticle()"></app-article>
     </div>
