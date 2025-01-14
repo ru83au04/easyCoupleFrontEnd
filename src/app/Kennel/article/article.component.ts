@@ -20,11 +20,11 @@ export class ArticleComponent {
   ngAfterViewInit() { 
     this.buildArticle();
   }
-
+  // NOTE: 關閉文章視窗(使用 @Output發送事件)
   close() {
     this.closeArticle.emit(false);
   }
-
+  // NOTE: 重構 wordpress 文章內容
   buildArticle() {
     let articleHTML = this.articleOuter.nativeElement;
     articleHTML.innerHTML = this.article;

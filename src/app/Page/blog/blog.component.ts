@@ -23,31 +23,21 @@ export class BlogComponent {
   }
 
   async getArticleList() {
-    let outer = document.getElementById('outer');
+    let titleList = document.getElementById('titleList');
     this.titles = await this.blogSrv.getArticleList();
     this.titles.map((title) => {
       const txt = document.createElement('h1');
       txt.innerHTML = title;
-      txt.tabIndex = 0;
       txt.addEventListener('click', () => {
         this.articleOpen = false;
         this.getArticle(title);
       });
-      outer!.appendChild(txt);
+      titleList!.appendChild(txt);
     })
   }
   getArticle(title: string) {
     this.articleOpen = true;
     this.content = this.blogSrv.getArticle(title);
-    // let articleInner = document.getElementById('articleInner')
-    // if (articleInner) {
-    //   articleInner.innerHTML = content;
-    //   return;
-    // }
-    // let textDiv = document.createElement('div');
-    // textDiv.id = "articleInner";
-    // textDiv.innerHTML = content;
-    // document.getElementById('articleTxt')?.appendChild(textDiv);
   }
 
   closeArticle() {

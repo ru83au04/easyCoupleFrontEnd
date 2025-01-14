@@ -1,0 +1,10 @@
+.title{
+    /* TODO: 設定標題列表的格式 */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.title:hover {
+    background-color: #f0f0f0;
+    color: #333;
+}
