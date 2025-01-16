@@ -1,9 +1,25 @@
 #articles {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(1fr, 1fr));
-  gap: 1rem;
-  /* 設置網格項之間的間距 */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  padding: 50px;
 }
 app-guidblock{
-  width: 33%;
+  overflow: hidden;
+  align-items: center;
+  border-radius: 25px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
+}
+app-guidblock:hover{
+  transform: translate(10px, -10px);
+  box-shadow: 0 4px 8px rgb(255, 255, 255),
+              0 6px 20px rgba(255, 255, 255, 0.662),
+              0 8px 30px rgba(255, 255, 255, 0.364);
+  border-radius: 25px;
+}
+
+app-article{
+  gap: 30px;
+  padding: 50px;
 }

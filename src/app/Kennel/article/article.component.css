@@ -1,6 +1,13 @@
 #articleOuter{
-    margin: 2rem;
-    padding: 1rem;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding-top: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 50px;
     font-size: 1.5rem;
+    background-color: var(--block-color);
+    border-radius: 25px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
 }
 

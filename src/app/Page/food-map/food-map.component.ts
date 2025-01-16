@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-food-map',
   standalone: true,
-  imports: [ FormsModule, NgFor],
+  imports: [FormsModule, NgFor],
   templateUrl: './food-map.component.html',
   styleUrl: './food-map.component.css'
 })

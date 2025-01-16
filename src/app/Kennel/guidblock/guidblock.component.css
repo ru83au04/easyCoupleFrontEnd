@@ -1,19 +1,15 @@
 #guidblock {
-    background-color: rgb(110, 68, 12);
-    border-radius: 25px;
-    width: 100%;
-    min-height: 500px;
+    background-color: var(--block-color);
     display: flex;
     flex-direction: column;
-    height: 100%;
     text-align: center;
+    height: 350px;
     padding: 10px;
-    margin: 30px;
 }
 
 #title {
     margin-top: 10px;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
 }
 
@@ -21,7 +17,8 @@
     flex-grow: 1;
     display: flex;
     text-align: left;
-    font-size: 1.5rem;
+    font-size: 1rem;
+    overflow: scroll;
     padding: 20px;
 }
 
@@ -30,6 +27,7 @@
     justify-content: space-around;
     align-items: center;
     padding: 10px;
+    height: 30px;
 }
 
 #name {

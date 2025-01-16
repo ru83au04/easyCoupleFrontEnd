@@ -19,7 +19,7 @@ export class BlogComponent {
 
   constructor(private blogSrv: BlogService) { }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.getArticleList();
   }
  
