@@ -11,3 +11,20 @@
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
 }
 
+#back{
+    color: var(--text-color);
+    font-size: 2rem;
+    position: absolute;
+    bottom: 40px;
+    right: -80px;
+    background-color: rgba(var(--block-color-truth), 0.5);
+    border-radius: 40px;
+    height: 90px;
+    width: 100px;
+    transition: right 0.3s ease;
+}
+
+#back.show{
+    right: 10px;
+}
+

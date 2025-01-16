@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, HostListener } from '@angular/core';
 import hljs from 'highlight.js';
 
 @Component({
@@ -11,6 +11,7 @@ export class ArticleComponent {
   @Input() article!: string;
   @Output() closeArticle = new EventEmitter<boolean>();
   @ViewChild('articleOuter', {static: true}) articleOuter!: ElementRef;
+  showBackButton: boolean = false;
   constructor() { }
 
   ngOnInit() { 
@@ -32,5 +33,25 @@ export class ArticleComponent {
       hljs.highlightElement(block as HTMLElement);
       block.style.borderRadius = '10px';
     });
+  }
+
+  // NOTE: 返回按鈕的收放
+  @HostListener('window:mousemove', ['$event'])
+  onMouseMove(event: MouseEvent) {
+    const backButton = document.getElementById('back');
+    if (backButton) {
+      const rect = backButton.getBoundingClientRect();
+      const distance = 50; // 距離範圍
+      if (
+        event.clientX >= rect.left - distance &&
+        event.clientX <= rect.right + distance &&
+        event.clientY >= rect.top - distance &&
+        event.clientY <= rect.bottom + distance
+      ) {
+        backButton.classList.add('show');
+      } else {
+        backButton.classList.remove('show');
+      }
+    }
   }
 }
