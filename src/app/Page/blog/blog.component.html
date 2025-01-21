@@ -3,4 +3,4 @@
         <app-guidblock *ngFor="let article of articles" [article]="article" (click)="getArticle(article.title)"></app-guidblock>
     </div>
 </main>
-<app-article *ngIf="articleOpen" [article]="content" (closeArticle)="closeArticle()"></app-article>
+<app-article *ngIf="articleOpen" [article]="article" (closeArticle)="closeArticle()"></app-article>

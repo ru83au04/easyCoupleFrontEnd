@@ -14,7 +14,7 @@ import { GuidblockComponent } from "../../Kennel/guidblock/guidblock.component";
 })
 export class BlogComponent {
   articles!: article[];
-  content: string = '';
+  article?: article;
   articleOpen: boolean = false;
 
   constructor(private blogSrv: BlogService) { }
@@ -22,14 +22,16 @@ export class BlogComponent {
   ngOnInit() {
     this.getArticleList();
   }
- 
-  async getArticleList() {
+  // NOTE: 取得所有文章
+  async getArticleList(): Promise<void>{
     this.articles = await this.blogSrv.getArticles();
   }
-  getArticle(title: string) {
+  // NOTE: 取出文章內文
+  getArticle(title: string): void{
     this.articleOpen = true;
-    this.content = this.blogSrv.getContent(title);
+    this.article = this.articles.find(art => art.title === title);
   }
+  // NOTE: 文章列表與文章頁面切換
   closeArticle() {
     this.articleOpen = false;
   }

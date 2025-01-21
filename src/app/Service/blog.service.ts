@@ -10,7 +10,7 @@ export class BlogService {
 
   constructor(private http: HttpClient) { 
   }
-
+  // NOTE: 取得所有文章
   async getArticles(): Promise<article[]> {
     try {
       let res = await lastValueFrom(this.http.get<wordpressRes>('https://public-api.wordpress.com/rest/v1.1/sites/ru83au04.wordpress.com/posts/'));
@@ -20,17 +20,6 @@ export class BlogService {
       console.error(err);
       return [];
     }
-  }
-  getContent(title: string): string{
-    const article = this.articles.find((art) => {
-      return art.title === title;
-    });
-    return article?.content || '';
-  }
-  getTitleList(): string[]{
-    return this.articles.map((art) => {
-      return art.title;
-    })
   }
 }
 
