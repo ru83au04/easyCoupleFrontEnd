@@ -8,7 +8,7 @@ import { GoogleMap, MapMarker } from '@angular/google-maps';
   providedIn: 'root'
 })
 export class MapService {
-  rootUrl = 'https://easy-couple-life.onrender.com';
+  rootUrl = environment.rootURL;
   currentLocation: any;
   map!: google.maps.Map;
   resultMarks: any[] = [];

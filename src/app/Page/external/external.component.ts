@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-external',
@@ -20,7 +21,7 @@ export class ExternalComponent {
 
       if (path) {
         // 組裝完整的外部 URL
-        const externalUrl = `https://easy-couple-life.onrender.com/${path}`;
+        const externalUrl = `${environment.rootURL}/${path}`;
         window.location.href = externalUrl; // 跳轉到外部路徑
       } else {
         // 如果 path 無效，跳回首頁

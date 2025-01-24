@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, lastValueFrom } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,7 @@ import { BehaviorSubject, lastValueFrom } from 'rxjs';
 export class WeatherService {
   private weatherSubject = new BehaviorSubject<any>(null); // 初始化時為空
   public weather$ = this.weatherSubject.asObservable();
-  rootUrl = 'https://easy-couple-life.onrender.com'
+  rootUrl = environment.rootURL;
 
   constructor(private http: HttpClient) {}
 

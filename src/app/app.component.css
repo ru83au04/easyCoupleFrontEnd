@@ -61,7 +61,6 @@ button:active {
     transition: height 1s ease, visibility 1s ease, margin 0.5s ease;
 }
 
-
 .app-root{
     height: 100%;
     /* flex-grow: 1; */
