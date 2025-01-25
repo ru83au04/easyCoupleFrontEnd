@@ -34,4 +34,8 @@ export class UserSystemComponent {
       console.log('請輸入帳號or密碼');
     }
   }
+
+  async deleteUser() {
+    console.log("刪除使用者建構中");
+  }
 }
