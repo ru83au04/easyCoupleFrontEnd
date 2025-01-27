@@ -1,6 +1,18 @@
 <div style="padding: 50px;">
-    <input [(ngModel)]="name">
-    <input [(ngModel)]="password">
-    <button (click)="registUser()">註冊會員</button>
-    <button (click)="deleteUser()">登入</button>
+    <div style="padding: 20px;">
+        <input [(ngModel)]="name" type="text" placeholder="輸入帳號">
+        <input [(ngModel)]="password" type="password" placeholder="輸入密碼">
+        <button (click)="registUser()">註冊會員</button>
+    </div>
+    <div style="padding: 20px;">
+        <input [(ngModel)]="loginName" type="text" placeholder="輸入帳號">
+        <input [(ngModel)]="loginPassword" type="password" placeholder="輸入密碼">
+        <button (click)="loginUser()">登入</button>
+    </div>
+    <div style="padding: 20px;">
+        <button (click)="checkData()">查詢資料</button>
+    </div>
+</div>
+<div>
+    <div id="data"></div>
 </div>

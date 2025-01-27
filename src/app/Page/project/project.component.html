@@ -1,0 +1,9 @@
+<main>
+    <div>
+        <button style="margin-top: 80px; margin-left: 20px" *ngFor="let project of projectList" (click)="openProject(project.order)">{{ project.title }}</button>
+    </div>
+    <div style="border: 3px solid black; margin-top: 20px">
+        <app-user-system *ngIf="userSystem"></app-user-system>
+        <app-food-map *ngIf="foodMap"></app-food-map>
+    </div>
+</main>

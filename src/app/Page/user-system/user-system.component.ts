@@ -11,18 +11,21 @@ import { UserService } from '../../Service/user.service';
 export class UserSystemComponent {
   name?: string;
   password?: string;
+  loginName: string = '';
+  loginPassword: string = '';
+  usinName?: string;
 
   constructor(private userSrv: UserService) { }
 
-  ngOnInit() {
-    console.log('User System Page');
-  }
+  ngOnInit() {}
 
   async registUser() {
     if (this.name && this.password) {
       try {
         let res = await this.userSrv.registUser(this.name, this.password);
         if (res) {
+          this.name = '';
+          this.password = '';
           console.log('註冊成功');
         } else {
           console.log('註冊失敗');
@@ -35,7 +38,20 @@ export class UserSystemComponent {
     }
   }
 
-  async deleteUser() {
-    console.log("刪除使用者建構中");
+  async loginUser() {
+    if (this.loginName === '' || this.loginPassword === '') {
+      console.log('請輸入帳號or密碼');
+      return;
+    }
+    try {
+      const res = this.userSrv.loginUser(this.loginName, this.loginPassword);
+      console.log('登入成功', res);
+    }catch(err){
+      console.error("登入失敗", err);
+    }
+  }
+
+  async checkData() {
+    console.log("查詢廖建構中");
   }
 }

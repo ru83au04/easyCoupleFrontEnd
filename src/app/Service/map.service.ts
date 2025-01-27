@@ -75,6 +75,8 @@ export class MapService {
       title: 'Advanced Marker',
       content: this.createCustomMarkerContent(),
     });
+
+    mapElement.style.margin = '80px';
   }
   // NOTE: 將使用者位置圖示放入地圖
   createCustomMarkerContent() {

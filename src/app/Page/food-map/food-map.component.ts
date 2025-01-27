@@ -3,13 +3,11 @@ import { NgFor } from '@angular/common';
 import { MapService } from '../../Service/map.service';
 import { environment } from '../../../environments/environment';
 import { FormsModule } from '@angular/forms';
-import { UserSystemComponent } from "../user-system/user-system.component";
-
 
 @Component({
   selector: 'app-food-map',
   standalone: true,
-  imports: [FormsModule, NgFor, UserSystemComponent],
+  imports: [FormsModule, NgFor],
   templateUrl: './food-map.component.html',
   styleUrl: './food-map.component.css'
 })
