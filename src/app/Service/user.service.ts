@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable, tap, catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -29,21 +29,24 @@ export class UserService {
     });
   }
   // NOTE: 登入使用者
-  loginUser(name: string, password: string): Promise<Object> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        let params = new HttpParams().set('username', name).set('password', password);
-        const res = this.http.get<HttpResponse<Object>>(`${this.rootUrl}/api/user/login`, { params, observe: 'body' });
-        const result = await lastValueFrom(res);
-        console.log("result", result);
-        console.log("body", result.body);
-        console.log("status", result.status);
-        console.log('登入成功', res);
-        resolve(result);
-      } catch (error) {
-        reject(error);
-      }
-    });
+  loginUser(name: string, password: string): Observable<HttpResult> {
+    let params = new HttpParams().set('username', name).set('password', password);
+    const res = this.http.get<HttpResult>(`${this.rootUrl}/api/user/login`, { params });
+    return res.pipe(
+      tap((data) => {
+        console.log("tap data", data);
+      }),
+      catchError((error) => {
+        console.log("error", error);
+        return throwError(() => error);
+      })
+    );
   }
   // TODO: 使用者查詢資料
 }
+
+interface HttpResult{
+    status: number,
+    message: string,
+    data: Object
+  }

@@ -43,12 +43,14 @@ export class UserSystemComponent {
       console.log('請輸入帳號or密碼');
       return;
     }
-    try {
-      const res = this.userSrv.loginUser(this.loginName, this.loginPassword);
-      console.log('登入成功', res);
-    }catch(err){
-      console.error("登入失敗", err);
-    }
+    this.userSrv.loginUser(this.loginName, this.loginPassword).subscribe({
+      next: (data) => {
+        console.log('最前端OK');
+      },
+      error: (error) => {
+        console.log('最前端不OK');
+      },
+    });
   }
 
   async checkData() {

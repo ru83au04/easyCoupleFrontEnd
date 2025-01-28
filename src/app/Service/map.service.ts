@@ -226,7 +226,8 @@ export class MapService {
   }
   // NOTE: 取得行政區列表
   async getAreaList(): Promise<{area: string}[]>{
-    try{
+    try {
+      console.log('getAreaList', this.rootUrl);
       const res = this.http.get<{area: string}[]>(`${this.rootUrl}/api/google/areaList`);
       const areas = await lastValueFrom(res);
       return areas;
