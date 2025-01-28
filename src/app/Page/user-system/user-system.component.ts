@@ -19,17 +19,25 @@ export class UserSystemComponent {
 
   ngOnInit() {}
 
-  async registUser() {
+  registUser() {
     if (this.name && this.password) {
       try {
-        let res = await this.userSrv.registUser(this.name, this.password);
-        if (res) {
-          this.name = '';
-          this.password = '';
-          console.log('註冊成功');
-        } else {
-          console.log('註冊失敗');
-        }
+        this.userSrv.registUser(this.name, this.password).subscribe({
+          next: (data) => {
+            console.log(data.status);
+            console.log(data.data);
+            if (data.status === 200) {
+              console.log('註冊成功');
+              return;
+            } else {
+              console.log('不明錯誤');
+              return;
+            }
+          },
+          error: (error) => {
+            console.log(`註冊失敗：${error.status}`, error.message);
+          },
+        });
       } catch (err) {
         console.error('註冊失敗', err);
       }
