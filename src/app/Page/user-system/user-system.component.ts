@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../Service/user.service';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-user-system',
-  imports: [FormsModule],
+  imports: [FormsModule, NgIf],
   templateUrl: './user-system.component.html',
   styleUrls: ['./user-system.component.css'],
 })
@@ -14,18 +15,49 @@ export class UserSystemComponent {
   loginName: string = '';
   loginPassword: string = '';
   usinName?: string;
+  register: boolean = false;
 
   constructor(private userSrv: UserService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
+  
+  // NOTE: 確認使用者
+  checkUser() {
+    if (this.name && this.password) {
+      try {
+        this.userSrv.checkUser(this.name, this.password).subscribe({
+          next: (data) => {
+            if (data.status === 200) {
+              if (!data.data[0]) {
+                this.register = true;
+              } else {
+                console.log('使用者已存在');
+              }
+              return;
+            } else {
+              // TEST: 測試用
+              console.log('不明問題');
+              return;
+            }
+          },
+          error: (error) => {
+            // TEST: 測試用，要在設計處理或通知邏輯
+            console.log(`確認失敗：${error.status}`, error.message);
+            throw error;
+          },
+        });
+      } catch (err) {
+        // TEST: 測試用，要在設計處理或通知邏輯
+        console.error('確認失敗', err);
+      }
+    }
+  }
   // NOTE: 註冊使用者
   registUser() {
     if (this.name && this.password) {
       try {
         this.userSrv.registUser(this.name, this.password).subscribe({
           next: (data) => {
-            console.log(data.status);
-            console.log(data.data);
             if (data.status === 200) {
               // TEST: 測試用
               console.log('註冊成功');
@@ -41,6 +73,7 @@ export class UserSystemComponent {
           error: (error) => {
             // TEST: 測試用，要在設計處理或通知邏輯
             console.log(`註冊失敗：${error.status}`, error.message);
+            throw error;
           },
         });
       } catch (err) {
@@ -78,6 +111,7 @@ export class UserSystemComponent {
           error: (error) => {
             // TEST: 測試用，要在設計處理或通知邏輯
             console.log(`登入失敗：${error.status}`, error.message);
+            throw error;
           },
         });
     } catch (err) {
@@ -110,6 +144,7 @@ export class UserSystemComponent {
         error: (error) => {
           // TEST: 測試用，要在設計處理或通知邏輯
           console.log(`查詢失敗：${error.status}`, error.message);
+          throw error;
         },
       });
     } catch (err) {

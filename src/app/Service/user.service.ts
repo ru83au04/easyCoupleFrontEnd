@@ -10,7 +10,11 @@ export class UserService {
   rootUrl = environment.rootURL;
 
   constructor(private http: HttpClient) { }
-  
+  // NOTE: 確認使用者
+  checkUser(name: string, password: string): Observable<HttpResult> {
+    let params = new HttpParams().set('username', name).set('password', password);
+    return this.http.get<HttpResult>(`${this.rootUrl}/api/user/check`, { params });
+  }
   // NOTE: 註冊使用者
   registUser(name: string, password: string): Observable<HttpResult> {
     let params = new HttpParams().set('username', name).set('password', password);
