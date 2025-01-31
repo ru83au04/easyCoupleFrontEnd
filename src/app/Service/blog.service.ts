@@ -26,6 +26,7 @@ export class BlogService {
 interface wordpressRes{
   posts: article[],
 }
+
 export interface article { 
   ID: number,
   author: {
