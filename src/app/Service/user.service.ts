@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
-import { User } from '../Page/user-system/user-system.component'
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +34,7 @@ export class UserService {
       .set('password', user.password)
       .set('name', user.real_name)
       .set('emergency', user.emergency)
-      .set('add', user.address)
+      .set('address', user.address)
       .set('start_date', user.start_date.toString())
       .set('role_id', user.role_id)
       .set('department_id', user.department_id);
@@ -45,7 +44,7 @@ export class UserService {
     * @param name: string - 使用者名稱
     * @param password: string - 使用者密碼
     * @return Observable<HttpResult> - 回傳HttpResult
-    * 回傳 data為 User物件
+    * 回傳 data為 Token
   */
   loginUser(name: string, password: string): Observable<HttpResult> {
     let params = new HttpParams().set('username', name).set('password', password);
@@ -56,9 +55,18 @@ export class UserService {
     * @return Observable<HttpResult> - 回傳HttpResult
     * 回傳 data為 User物件
   */
-  getUserInfo(token: string): Observable<HttpResult> {
+  getUserInfo(token: string, id: number): Observable<HttpResult> {
     let headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    if (id !== 0) {
+      let params = new HttpParams().set('id', id);
+      return this.http.get<HttpResult>(`${this.rootUrl}/api/user/info`, { headers, params });
+    }
     return this.http.get<HttpResult>(`${this.rootUrl}/api/user/info`, { headers });
+  }
+  deleteUser(token: string, id: number): Observable<HttpResult> {
+    let headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    let params = new HttpParams().set('id', id);
+    return this.http.get<HttpResult>(`${this.rootUrl}/api/user/delete`, { headers, params });
   }
 }
 

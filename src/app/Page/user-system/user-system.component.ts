@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../Service/user.service';
 import { NgIf } from '@angular/common';
+import { User } from '../../Service/auth.service';
+import { AuthService } from '../../Service/auth.service';
 
 @Component({
   selector: 'app-user-system',
@@ -15,18 +17,21 @@ export class UserSystemComponent {
   checkPassword?: string;
   loginName: string = '';
   loginPassword: string = '';
-  usinName?: string;
   register: boolean = false;
+  deleteId: number = 0;
+  searchId: number = 0;
   userData: any = {
     real_name: '',
     emergency: '',
     address: '',
     start_date: new Date(),
-    role_id: 0,
-    department_id: 0,
+    role_id: 1,
+    department_id: 1,
   };
 
-  constructor(private userSrv: UserService) { }
+  constructor(private userSrv: UserService,
+    private authSrv: AuthService
+  ) { }
 
   ngOnInit() { }
   
@@ -69,7 +74,7 @@ export class UserSystemComponent {
   }
   // NOTE: 註冊使用者
   registUser() {
-    if (this.userData.username && this.userData.password) {
+    if (this.userData.username && this.userData.password && this.userData.real_name != '' && this.userData.emergency != '') {
       try {
         this.userSrv.registUser(this.userData).subscribe({
           next: (data) => {
@@ -102,7 +107,7 @@ export class UserSystemComponent {
       }
     } else {
       // TODO: 彈出提醒視窗
-      console.log('請確認帳號或密碼');
+      console.log('註冊資料不完整');
     }
   }
   // NOTE: 登入使用者
@@ -138,19 +143,21 @@ export class UserSystemComponent {
       }
   }
   // NOTE: 已登入的使用者查看資料
-  async getUserInfo() {
+  async getUserInfo(id: number) {
     try {
       let token = localStorage.getItem('token');
       if (!token) {
         // TODO: 跳出提醒視窗
         console.log('請先登入');
+        return;
       }
-      this.userSrv.getUserInfo(token!).subscribe({
+      this.userSrv.getUserInfo(token, id).subscribe({
         next: (data) => {
           if (data.status === 200) {
             // TODO: 跳出提醒視窗
             console.log('查詢成功');
             let user: User = data.data[0];
+            this.authSrv.loginUser(user);
           } else {
             // TODO: 跳出提醒視窗
             console.log('查詢失敗');
@@ -167,19 +174,41 @@ export class UserSystemComponent {
       console.error('查詢失敗', err);
     }
   }
-}
-
-export interface User {
-  real_name: string;
-  level: number;
-  role_id: number;
-  department_id: number;
-  username: string;
-  emergency: string;
-  address: string;
-  start_date: Date;
-  special_date: number;
-  special_date_delay: number;
-  rank: string;
-  regist_date: Date;
+  async deleteUser(id: number) {
+    try {
+      let token = localStorage.getItem('token');
+      if (!token) {
+        // TODO: 跳出提醒視窗
+        console.log('請先登入');
+        return;
+      }
+      if (id && id !== 0) {
+        this.userSrv.deleteUser(token, id).subscribe({
+          next: (data) => {
+            if (data.status === 200) {
+              console.log('刪除成功');
+            } else {
+              // TODO: 跳出提醒視窗
+              console.log('不明原因刪除失敗');
+            }
+          },
+          error: (error) => {
+            // TODO: 跳出提醒視窗
+            console.log(`刪除失敗：${error.status}`, error.message);
+            throw error;
+          }
+        });
+      } else {
+        // TODO: 跳出提醒視窗
+        console.log("請輸入有效ID");
+      }
+    } catch (err) {
+      // TODO: 跳出提醒視窗
+      console.error('刪除失敗', err);
+    }    
+  }
+  logoutUser() {
+    this.authSrv.logoutUser();
+    localStorage.removeItem('token');
+  }
 }
