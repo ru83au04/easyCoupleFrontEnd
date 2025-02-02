@@ -1,6 +1,7 @@
-<main>
-    <div>
-        <button *ngFor="let project of projectList" [routerLink]="['/project', project.path]">{{ project.title }}</button>
+<main *ngIf="list">
+    <div class="project-block" *ngFor="let project of projectList" [routerLink]="['/project', project.path]" (click)="open()">
+        <p>{{project.title}}</p>
     </div>
 </main>
-<router-outlet></router-outlet>
+<router-outlet *ngIf="!list"></router-outlet>
+<button *ngIf="!list" id="back" (click)="close()">返回</button>

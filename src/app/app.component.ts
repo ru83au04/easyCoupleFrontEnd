@@ -23,7 +23,7 @@ export class AppComponent {
 
   onScroll() {
     const scrollTop = this.appRoot.nativeElement.scrollTop || 0;
-    const threshold = 150; // 捲動超過 100px 時隱藏 head
+    const threshold = 50; // 捲動超過 100px 時隱藏 head
     this.headHidden = scrollTop > threshold;
   }
   

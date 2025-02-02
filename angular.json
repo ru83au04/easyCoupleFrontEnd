@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular_capacitor_2": {
+    "easy-couple-life": {
       "projectType": "application",
       "schematics": {},
       "root": "",
