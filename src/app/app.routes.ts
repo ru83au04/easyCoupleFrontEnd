@@ -10,7 +10,11 @@ import { ProjectComponent } from './Page/project/project.component';
 export const routes: Routes = [
     { path: '', component: HomeComponent},
     { path: 'weather', component: WeatherComponent},
-    { path: 'project', component: ProjectComponent},
+    {
+        path: 'project', component: ProjectComponent, children: [
+            { path: 'user-system', loadComponent: () => import('./Page/user-system/user-system.component').then(m => m.UserSystemComponent) },
+            { path: 'food-map', loadComponent: () => import('./Page/food-map/food-map.component').then(m => m.FoodMapComponent) }    
+    ]},
     { path: 'signin', component: SignInComponent},
     { path: 'external/:path', component: ExternalComponent},
     { path: 'blog', component: BlogComponent},

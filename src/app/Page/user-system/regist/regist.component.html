@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="step1" *ngIf="!detail">
+        <input type="text" [(ngModel)]="username" placeholder="輸入帳號">
+        <input type="password" [(ngModel)]="password" placeholder="輸入密碼">
+        <input type="password" [(ngModel)]="checkPassword" placeholder="再次輸入密碼">
+        <button (click)="checkUser()">註冊</button>
+    </div>
+    <div class="step2" *ngIf="detail">
+        <input type="text" [(ngModel)]="username" placeholder="輸入帳號" disabled>
+        <input type="password" [(ngModel)]="password" placeholder="輸入密碼" disabled>
+        <input type="text" [(ngModel)]="real_name" placeholder="輸入姓名">
+        <input type="number" [(ngModel)]="phone" placeholder="輸入電話">
+        <input type="text" [(ngModel)]="emergency" placeholder="緊急聯絡人">
+        <input type="number" [(ngModel)]="emergency_phone" placeholder="緊急聯絡人電話">
+        <input type="text" [(ngModel)]="address" placeholder="輸入地址">
+        <input type="date" [(ngModel)]="start_date" placeholder="輸入到職日">
+        <select type="text" [(ngModel)]="role">
+            <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+        </select>
+        <select type="text" [(ngModel)]="department">
+            <option *ngFor="let department of departments" [value]="department">{{ department }}</option>
+        </select>
+        <button (click)="registUser()">確認</button>
+    </div>
+</div>

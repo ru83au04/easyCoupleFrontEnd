@@ -1,11 +1,12 @@
-<div style="padding: 50px;">
-    <div style="padding: 20px;">
-        <input [(ngModel)]="name" type="text" placeholder="輸入帳號">
-        <input [(ngModel)]="password" type="password" placeholder="輸入密碼">
-        <input [(ngModel)]="checkPassword" type="password" placeholder="確認密碼">
-        <button (click)="checkUser()">註冊會員</button>
+<div>
+    <div>
+        <button (click)="showRegist()">註冊</button>
+        <!-- <button (click)="showLogin()">登入</button> -->
     </div>
-    <div style="padding: 20px;">
+    <div *ngIf="showRegistPage">
+        <app-regist (finishRegist)="onFinishRegist($event)"></app-regist>
+    </div>
+    <!-- <div style="padding: 20px;">
         <input [(ngModel)]="loginName" type="text" placeholder="輸入帳號">
         <input [(ngModel)]="loginPassword" type="password" placeholder="輸入密碼">
         <button (click)="loginUser()">登入</button>
@@ -16,20 +17,7 @@
     </div>
     <input [(ngModel)]="deleteId" type="number" placeholder="輸入要刪除的ID">
     <button (click)="deleteUser(deleteId)">刪除</button>
-    <button (click)="logoutUser()">登出</button>
+    <button (click)="logoutUser()">登出</button> -->
 </div>
-<div *ngIf='register'>
-    <div id="data">輸入基本資料</div>
-    <div>
-        <input [(ngModel)]="userData.username" type="text" disabled>
-        <input [(ngModel)]="userData.password" type="password" disabled>
-        <input [(ngModel)]="userData.real_name" type="text" placeholder="輸入真實姓名(必填)">
-        <input [(ngModel)]="userData.emergency" type="text" placeholder="輸入緊急聯絡人(必填)">
-        <input [(ngModel)]="userData.address" type="text" placeholder="輸入地址">
-        <input [(ngModel)]="userData.start_date" type="date" placeholder="輸入到職日">
-        <input [(ngModel)]="userData.role_id" type="text" placeholder="選擇職務">
-        <input [(ngModel)]="userData.department_id" type="text" placeholder="選擇部門">
-        <button (click)="registUser()">確認</button>
-    </div>
-</div>
+<app-user-alert *ngIf="showAlert" (closeAlert)="onClosedAlert($event)" [alertMessage]="alertMessage"></app-user-alert>
 

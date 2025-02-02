@@ -7,8 +7,8 @@
 }
 :root{
     --text-color: rgba(244, 228, 198, 1);
-    --title-color: rgba(0, 91, 12, 0.724);
-    --main-color: rgba(77, 36, 0, 0.76);
+    --title-color: rgba(27, 100, 3, 0.724);
+    --main-color: rgba(0, 0, 0, 0.865);
     --second-color: rgba(5, 176, 250, 0.906);
     --block-color: rgba(4, 77, 90, 1);
     --block-color-truth: 4, 77, 90;

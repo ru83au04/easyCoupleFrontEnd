@@ -1,44 +1,38 @@
-import { Component, HostListener, } from '@angular/core';
+import { Component, HostListener, ElementRef, ViewChild } from '@angular/core';
 import { RouterOutlet, RouterModule } from '@angular/router';
 import { MapService } from './Service/map.service';
-import { NgIf } from '@angular/common';
-
+import { NgClass } from '@angular/common';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterModule, NgIf],
+  imports: [RouterOutlet, RouterModule, NgClass],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular_capacitor_2';
-  headVisible: boolean = true;
+  title = 'easy_couple_life';
+  headHidden = false; // head 是否隱藏
+
+  @ViewChild('appRoot') appRoot!: ElementRef;
 
   constructor(private mapSrv: MapService){ }
 
-  ngOnInit() { }
+  ngAfterViewInit() {
+    this.appRoot.nativeElement.addEventListener('scroll', this.onScroll.bind(this));
+  }
+
+  onScroll() {
+    const scrollTop = this.appRoot.nativeElement.scrollTop || 0;
+    const threshold = 150; // 捲動超過 100px 時隱藏 head
+    this.headHidden = scrollTop > threshold;
+  }
   
-  @HostListener('window:mousemove', ['$event']) onMouseMove(event: MouseEvent) {
-    const head = document.getElementById('head');
-    const title = document.getElementById('head-title');
-    const buttons = document.getElementById('button-container');
-    if (head) {
-      const rect = head.getBoundingClientRect();
-      const distance = 50;
-      if (
-        event.clientX >= rect.left - distance &&
-        event.clientX <= rect.right + distance &&
-        event.clientY >= rect.top - distance &&
-        event.clientY <= rect.bottom + distance
-      ) {
-        head.classList.add('show');
-        title!.style.visibility = 'visible';
-        buttons!.style.visibility = 'visible';
-      } else {
-        head.classList.remove('show');
-        title!.style.visibility = 'hidden';
-        buttons!.style.visibility = 'hidden';
-      }
-    }
+  
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const threshold = 100; // 捲動超過 100px 時隱藏 head
+
+    this.headHidden = scrollTop > threshold;
   }
 }

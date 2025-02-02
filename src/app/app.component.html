@@ -1,6 +1,6 @@
 <div class="main-container">
-  <div id="head">
-    <div *ngIf="headVisible" id="head-title">
+  <div id="head" [ngClass]="{'head-hidden': headHidden}">
+    <div id="head-title">
       <div class="name-size en-name" [routerLink]="['']" [queryParams]="{ notFirst: true}">
         <div class="name-start">
           N
@@ -15,14 +15,13 @@
         </div>
       </div>
     </div>
-    <div *ngIf="headVisible" id="button-container">
+    <div id="button-container">
       <button routerLink="/blog">Blog</button>
       <button routerLink="/project">作品</button>
       <button routerLink="/about">關於</button>
-      <!-- <button routerLink="/weather">現在天氣</button> -->
     </div>    
   </div>
-  <div class="app-root">
+  <div class="app-root" #appRoot>
     <router-outlet></router-outlet>
   </div>
 </div>

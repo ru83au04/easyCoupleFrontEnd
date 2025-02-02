@@ -1,17 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../Service/user.service';
 import { NgIf } from '@angular/common';
 import { User } from '../../Service/auth.service';
 import { AuthService } from '../../Service/auth.service';
+import { RegistComponent } from './regist/regist.component';
+import { UserAlertComponent } from './user-alert/user-alert.component';
 
 @Component({
   selector: 'app-user-system',
-  imports: [FormsModule, NgIf],
+  imports: [FormsModule, NgIf, RegistComponent, UserAlertComponent],
   templateUrl: './user-system.component.html',
   styleUrls: ['./user-system.component.css'],
 })
 export class UserSystemComponent {
+  alert = new UserAlertComponent();
+  alertMessage: string = '';
   name?: string;
   password?: string;
   checkPassword?: string;
@@ -20,96 +24,41 @@ export class UserSystemComponent {
   register: boolean = false;
   deleteId: number = 0;
   searchId: number = 0;
-  userData: any = {
-    real_name: '',
-    emergency: '',
-    address: '',
-    start_date: new Date(),
-    role_id: 1,
-    department_id: 1,
-  };
+  
+  //TODO: 新使用方式
+  showAlert: boolean = false;
+  showRegistPage: boolean = false;
+
 
   constructor(private userSrv: UserService,
-    private authSrv: AuthService
-  ) { }
+    private authSrv: AuthService,
+  ) {}
 
   ngOnInit() { }
   
-  // NOTE: 確認使用者
-  checkUser() {
-    if (this.name && this.password && this.checkPassword === this.password) {
-      try {
-        this.userSrv.checkUser(this.name, this.password).subscribe({
-          next: (data) => {
-            if (data.status === 200) {
-              if (!data.data[0]) {
-                this.register = true;
-                this.userData['username'] = this.name;
-                this.userData['password'] = this.password;
-                this.name = '';
-                this.password = '';
-                this.checkPassword = '';                
-              } else {
-                // TODO: 跳出提醒視窗
-                console.log('使用者已存在');
-              }
-            } else {
-              // TODO: 跳出提醒視窗
-              console.log('不明問題');
-            }
-          },
-          error: (error) => {
-            // TODO: 跳出提醒視窗
-            console.log(`確認失敗：${error.status}`, error.message);
-            throw error;
-          },
-        });
-      } catch (err) {
-        // TODO: 跳出提醒視窗
-        console.error('確認失敗', err);
-      }
-    } else {
-      console.log('請確認帳號、密碼或確認密碼');
-    }
+  // TODO: 註冊使用者頁面開啟
+  showRegist() {
+    this.showRegistPage = true;
   }
-  // NOTE: 註冊使用者
-  registUser() {
-    if (this.userData.username && this.userData.password && this.userData.real_name != '' && this.userData.emergency != '') {
-      try {
-        this.userSrv.registUser(this.userData).subscribe({
-          next: (data) => {
-            if (data.status === 200) {
-              // TODO: 跳出提醒視窗
-              console.log('註冊成功');
-              this.userData = {
-                real_name: '',
-                emergency: '',
-                address: '',
-                start_date: new Date(),
-                role_id: 0,
-                department_id: 0,
-              };
-              this.register = false;
-            } else {
-              // TODO: 跳出提醒視窗
-              console.log('不明錯誤');
-            }
-          },
-          error: (error) => {
-            // TODO: 跳出提醒視窗
-            console.log(`註冊失敗：${error.status}`, error.message);
-            throw error;
-          },
-        });
-      } catch (err) {
-        // TODO: 跳出提醒視窗
-        console.error('註冊失敗', err);
-      }
+  // TODO: 註冊使用者頁面關閉
+  onFinishRegist(event: Object) {
+    let regist: registResult = event as registResult;
+    if (regist.result) {
+      this.alertMessage = regist.message;
+      this.alert.Alert(() => {
+        this.showRegistPage = false;
+      });
     } else {
-      // TODO: 彈出提醒視窗
-      console.log('註冊資料不完整');
+      this.alertMessage = regist.message;
+      this.alert.Alert(() => {});
     }
+    this.showAlert = true;
   }
+
+  onClosedAlert(event: boolean) {
+    this.showAlert = event;
+  }
+
   // NOTE: 登入使用者
   async loginUser() {
     if (this.loginName === '' || this.loginPassword === '') {
@@ -212,3 +161,93 @@ export class UserSystemComponent {
     localStorage.removeItem('token');
   }
 }
+
+interface registResult{
+  result: boolean;
+  message: string;
+}
+
+
+
+
+
+
+
+
+
+
+  // // NOTE: 確認使用者
+  // checkUser() {
+  //   if (this.name && this.password && this.checkPassword === this.password) {
+  //     try {
+  //       this.userSrv.checkUser(this.name, this.password).subscribe({
+  //         next: (data) => {
+  //           if (data.status === 200) {
+  //             if (!data.data[0]) {
+  //               this.register = true;
+  //               this.userData['username'] = this.name;
+  //               this.userData['password'] = this.password;
+  //               this.name = '';
+  //               this.password = '';
+  //               this.checkPassword = '';                
+  //             } else {
+  //               // TODO: 跳出提醒視窗
+  //               console.log('使用者已存在');
+  //             }
+  //           } else {
+  //             // TODO: 跳出提醒視窗
+  //             console.log('不明問題');
+  //           }
+  //         },
+  //         error: (error) => {
+  //           // TODO: 跳出提醒視窗
+  //           console.log(`確認失敗：${error.status}`, error.message);
+  //           throw error;
+  //         },
+  //       });
+  //     } catch (err) {
+  //       // TODO: 跳出提醒視窗
+  //       console.error('確認失敗', err);
+  //     }
+  //   } else {
+  //     console.log('請確認帳號、密碼或確認密碼');
+  //   }
+  // }
+  // // NOTE: 註冊使用者
+  // registUser() {
+  //   if (this.userData.username && this.userData.password && this.userData.real_name != '' && this.userData.emergency != '') {
+  //     try {
+  //       this.userSrv.registUser(this.userData).subscribe({
+  //         next: (data) => {
+  //           if (data.status === 200) {
+  //             // TODO: 跳出提醒視窗
+  //             console.log('註冊成功');
+  //             this.userData = {
+  //               real_name: '',
+  //               emergency: '',
+  //               address: '',
+  //               start_date: new Date(),
+  //               role_id: 0,
+  //               department_id: 0,
+  //             };
+  //             this.register = false;
+  //           } else {
+  //             // TODO: 跳出提醒視窗
+  //             console.log('不明錯誤');
+  //           }
+  //         },
+  //         error: (error) => {
+  //           // TODO: 跳出提醒視窗
+  //           console.log(`註冊失敗：${error.status}`, error.message);
+  //           throw error;
+  //         },
+  //       });
+  //     } catch (err) {
+  //       // TODO: 跳出提醒視窗
+  //       console.error('註冊失敗', err);
+  //     }
+  //   } else {
+  //     // TODO: 彈出提醒視窗
+  //     console.log('註冊資料不完整');
+  //   }
+  // }
