@@ -1,14 +1,16 @@
 import { Component, HostListener } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { RouterModule, RouterOutlet } from '@angular/router';
+import { UserSystemComponent } from '../user-system/user-system.component';
+
 @Component({
   selector: 'app-project',
-  imports: [NgFor, NgIf, RouterModule, RouterOutlet],
+  imports: [NgFor, NgIf, RouterModule, RouterOutlet, UserSystemComponent],
   templateUrl: './project.component.html',
   styleUrl: './project.component.css'
 })
 export class ProjectComponent {
-  list: boolean = true;
+  list!: boolean;
   projectList: projectData[] = [
     {
       title: "使用者系統",
@@ -23,6 +25,12 @@ export class ProjectComponent {
       輸入指定時間跟地點，標示出附近的垃圾清運時間與地點(非即時)`
     },
   ];
+
+  ngOnInit() {
+    this.list = true;
+    console.log('project component init', this.list);
+  }
+
   // NOTE: 打開專案
   open() {
     this.list = false;

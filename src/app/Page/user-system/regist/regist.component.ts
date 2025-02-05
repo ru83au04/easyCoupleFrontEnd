@@ -32,7 +32,7 @@ export class RegistComponent {
   constructor(private userSrv: UserService) {
     this.roles = Object.keys(Roles).filter((item) => isNaN(Number(item)));
     this.departments = Object.keys(Departments).filter((item) => isNaN(Number(item)));
-   }
+  }
 
   ngOnInit() { }
 

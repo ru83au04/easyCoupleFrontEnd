@@ -16,9 +16,9 @@
       </div>
     </div>
     <div id="button-container">
-      <button routerLink="/blog">學習筆記</button>
-      <button routerLink="/project">作品</button>
-      <button routerLink="/about">關於</button>
+      <button (click)="navigateTo('/blog')">學習筆記</button>
+      <button (click)="navigateTo('/project')">作品</button>
+      <button (click)="navigateTo('/about')">關於</button>
     </div>    
   </div>
   <div class="app-root" #appRoot>

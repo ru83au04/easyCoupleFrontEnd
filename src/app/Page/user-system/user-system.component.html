@@ -1,23 +1,10 @@
 <div>
-    <div>
-        <button (click)="showRegist()">註冊</button>
-        <!-- <button (click)="showLogin()">登入</button> -->
+    <div *ngIf="!showLoginPage && !showRegistPage" class="button-container">
+        <div class="user-system-block" (click)="showPage('regist')">註冊</div>
+        <div class="user-system-block" (click)="showPage('login')">登入</div>
     </div>
-    <div *ngIf="showRegistPage">
-        <app-regist (finishRegist)="onFinishRegist($event)"></app-regist>
-    </div>
-    <!-- <div style="padding: 20px;">
-        <input [(ngModel)]="loginName" type="text" placeholder="輸入帳號">
-        <input [(ngModel)]="loginPassword" type="password" placeholder="輸入密碼">
-        <button (click)="loginUser()">登入</button>
-    </div>
-    <div style="padding: 20px;">
-        <input [(ngModel)]="searchId" type="number" placeholder="輸入ID">
-        <button (click)="getUserInfo(searchId)">查詢資料</button>
-    </div>
-    <input [(ngModel)]="deleteId" type="number" placeholder="輸入要刪除的ID">
-    <button (click)="deleteUser(deleteId)">刪除</button>
-    <button (click)="logoutUser()">登出</button> -->
+    <app-regist *ngIf="showRegistPage" (finishRegist)="onFinish($event)"></app-regist>
+    <app-login *ngIf="showLoginPage" (finishLogin)="onFinish($event)"></app-login>
 </div>
 <app-user-alert *ngIf="showAlert" (closeAlert)="onClosedAlert($event)" [alertMessage]="alertMessage"></app-user-alert>
 

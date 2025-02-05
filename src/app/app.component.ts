@@ -1,7 +1,9 @@
 import { Component, HostListener, ElementRef, ViewChild } from '@angular/core';
-import { RouterOutlet, RouterModule } from '@angular/router';
+import { RouterOutlet, RouterModule, Router } from '@angular/router';
 import { MapService } from './Service/map.service';
 import { NgClass } from '@angular/common';
+
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -15,10 +17,16 @@ export class AppComponent {
 
   @ViewChild('appRoot') appRoot!: ElementRef;
 
-  constructor(private mapSrv: MapService){ }
+  constructor(private mapSrv: MapService, private router: Router){ }
 
   ngAfterViewInit() {
     this.appRoot.nativeElement.addEventListener('scroll', this.onScroll.bind(this));
+  }
+
+  navigateTo(route: string) {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([route]);
+    });
   }
 
   onScroll() {
@@ -26,7 +34,6 @@ export class AppComponent {
     const threshold = 50; // 捲動超過 100px 時隱藏 head
     this.headHidden = scrollTop > threshold;
   }
-  
   
   @HostListener('window:scroll', [])
   onWindowScroll() {

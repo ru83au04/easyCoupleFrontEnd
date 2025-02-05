@@ -1,18 +1,19 @@
 .container{
+    margin: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.step1{
+.regist-container{
     padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 30px;
-    border: 1px solid #ccc;
-    width: 500px;
+    border: 1px solid var(--text-color);
+    width: 300px;
 }
 .step2{
     display: flex;
@@ -27,8 +28,4 @@ input{
     border: 1px solid #ccc;
     width: 200px;
     height: 10px;
-}
-
-button{
-    margin: 10px;
 }

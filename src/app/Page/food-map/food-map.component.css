@@ -1,8 +1,11 @@
 .map_container{
-    height:100%;
-    margin: 10px;
+    height:500px;
+    margin: 0px;
 }
 
-.map_container{
-    height: 500px;
+.button_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
 }
