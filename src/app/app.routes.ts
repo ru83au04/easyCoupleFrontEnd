@@ -14,7 +14,7 @@ export const routes: Routes = [
     {
         path: 'project', component: ProjectComponent, children: [
             { path: 'user-system', loadComponent: () => import('./Page/user-system/user-system.component').then(m => m.UserSystemComponent), canActivate: [userSystemGuard] },
-            { path: 'food-map', loadComponent: () => import('./Page/food-map/food-map.component').then(m => m.FoodMapComponent) }    
+            { path: 'food-map', loadComponent: () => import('./Page/food-map/food-map.component').then(m => m.FoodMapComponent) },
     ]},
     { path: 'signin', component: SignInComponent},
     { path: 'external/:path', component: ExternalComponent},
