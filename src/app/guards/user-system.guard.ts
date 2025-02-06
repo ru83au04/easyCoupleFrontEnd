@@ -5,7 +5,7 @@ export const userSystemGuard: CanActivateFn = (route, state) => {
   const token = localStorage.getItem('token');
   if (token) {
     const router = new Router();
-    router.navigate(['/']);
+    router.navigate(['/user-operation']);
     return false;
   } else {
     return true;

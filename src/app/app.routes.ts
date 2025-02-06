@@ -7,17 +7,22 @@ import { BlogComponent } from './Page/blog/blog.component';
 import { AboutComponent } from './Page/about/about.component';
 import { ProjectComponent } from './Page/project/project.component';
 import { userSystemGuard } from './guards/user-system.guard';
+import { UserOperationComponent } from './Page/user-operation/user-operation.component';
 
 export const routes: Routes = [
-    { path: '', component: HomeComponent},
-    { path: 'weather', component: WeatherComponent},
-    {
-        path: 'project', component: ProjectComponent, children: [
-            { path: 'user-system', loadComponent: () => import('./Page/user-system/user-system.component').then(m => m.UserSystemComponent), canActivate: [userSystemGuard] },
-            { path: 'food-map', loadComponent: () => import('./Page/food-map/food-map.component').then(m => m.FoodMapComponent) },
-    ]},
-    { path: 'signin', component: SignInComponent},
-    { path: 'external/:path', component: ExternalComponent},
-    { path: 'blog', component: BlogComponent},
-    { path: 'about', component: AboutComponent},
+  { path: '', component: HomeComponent },
+  { path: 'weather', component: WeatherComponent },
+  {
+    path: 'project',
+    component: ProjectComponent,
+    children: [
+      { path: 'user-system', loadComponent: () => import('./Page/user-system/user-system.component').then(m => m.UserSystemComponent), canActivate: [userSystemGuard] },
+      { path: 'food-map', loadComponent: () => import('./Page/food-map/food-map.component').then(m => m.FoodMapComponent) },
+    ],
+  },
+  { path: 'signin', component: SignInComponent },
+  { path: 'external/:path', component: ExternalComponent },
+  { path: 'blog', component: BlogComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'user-operation', component: UserOperationComponent },
 ];
