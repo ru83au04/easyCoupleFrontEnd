@@ -5,7 +5,7 @@ import { UserSystemComponent } from '../user-system/user-system.component';
 
 @Component({
   selector: 'app-project',
-  imports: [NgFor, NgIf, RouterModule, RouterOutlet, UserSystemComponent],
+  imports: [NgFor, NgIf, RouterModule, RouterOutlet],
   templateUrl: './project.component.html',
   styleUrl: './project.component.css'
 })

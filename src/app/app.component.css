@@ -14,7 +14,7 @@
 .head-hidden {
     opacity: 0;
     transform: translateY(-100%);
-    height: 0px;
+    height: 100px;
 }
 
 button {
@@ -51,7 +51,6 @@ button:active {
 
 .app-root{
     flex-grow: 1;
-    /* height: 100%; */
     overflow-y: auto;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;

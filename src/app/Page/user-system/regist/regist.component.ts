@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { NgIf, NgFor } from '@angular/common';
 import { Roles } from '../../../Service/auth.service';
 import { Departments } from '../../../Service/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-regist',
@@ -13,21 +14,25 @@ import { Departments } from '../../../Service/auth.service';
 })
 export class RegistComponent {
   @Output() finishRegist = new EventEmitter<Object>();
+  @Output() cancel = new EventEmitter<boolean>();
 
   roles?: string[];
   departments?: string[];
   checkPassword?: string;
   username = '';
   password = '';
-  real_name = '';
-  phone?: number;
-  emergency = '';
-  emergency_phone?: number;
   address = '';
   start_date = new Date();
   role?: any;
   department?: any;
   detail = false;
+
+  basicData = [
+    { name: '', type: 'text', placeholder: '真實姓名(必填)'},
+    { name: 123456789, type: 'number', placeholder: '電話'},
+    { name: '', type: 'text', placeholder: '緊急聯絡人(必填)'},
+    { name: 987654321, type: 'number', placeholder: '緊急聯絡人電話'},
+  ];
 
   constructor(private userSrv: UserService) {
     this.roles = Object.keys(Roles).filter((item) => isNaN(Number(item)));
@@ -79,15 +84,15 @@ export class RegistComponent {
   registUser() {
     if (this.username
       && this.password
-      && this.real_name != ''
-      && this.emergency != '') {
+      && this.basicData[0].name != ''
+      && this.basicData[2].name != '') {
       let userData = {
         username: this.username,
         password: this.password,
-        real_name: this.real_name,
-        phone: this.phone,
-        emergency: this.emergency,
-        emergency_phone: this.emergency_phone,
+        real_name: this.basicData[0].name,
+        phone: this.basicData[1].name,
+        emergency: this.basicData[2].name,
+        emergency_phone: this.basicData[3].name,
         address: this.address,
         start_date: this.start_date,
         role_id: Roles[this.role],
@@ -97,37 +102,31 @@ export class RegistComponent {
         this.userSrv.registUser(userData).subscribe({
           next: (data) => {
             if (data.status === 200) {
-              // TODO: 跳出提醒視窗
-              console.log('註冊成功');
               this.username = '';
               this.password = '';
-              this.real_name = '';
-              this.phone = undefined;
-              this.emergency = '';
-              this.emergency_phone = undefined;
+              this.basicData[0].name = '';
+              this.basicData[1].name = 123456789;
+              this.basicData[2].name = '';
+              this.basicData[3].name = 987654312;
               this.address = '';
               this.start_date = new Date();
               this.role = '';
               this.department = '';
-              // TODO: 應該要在通知視窗後執行
               this.finish(true, '註冊成功');
             } else {
-              // TODO: 跳出提醒視窗
               this.finish(false, '註冊失敗');
             }
           },
-          error: (error) => {
-            // TODO: 跳出提醒視窗
-            this.finish(false, '註冊失敗：' + error.message);
+          error: (error: HttpErrorResponse) => {
+            console.log(`註冊失敗： ${error.status}`, error.error.message);
+            this.finish(false, `註冊失敗： ${error.error.message}`);
           },
         });
       } catch (err) {
-        // TODO: 跳出提醒視窗
         this.finish(false, '註冊失敗');
         console.error('註冊失敗', err);
       }
     } else {
-      // TODO: 彈出提醒視窗
       console.log('註冊資料不完整');
       this.finish(false, '註冊資料不完整');
     }
@@ -135,5 +134,8 @@ export class RegistComponent {
 
   finish(result: boolean, message: string) {
     this.finishRegist.emit({ result, message });
+  }
+  cancelRegist(){
+    this.cancel.emit(false);
   }
 }

@@ -15,17 +15,12 @@ export class HomeComponent {
   oneReady = false;
   twoReady = false;
   goToAbout = false;
-  firstVisit!: boolean;
   learningTime = { title: "學習 Coding累計至今", targetDate: new Date('2023/01/01'), plus: true }
   careerTime = { title: "從事前端工作累計至今", targetDate: new Date('2024/04/08'), plus: true }
 
   constructor(private router: Router, private active: ActivatedRoute){}
 
-  ngOnInit(){
-    this.active.queryParams.subscribe(params => this.firstVisit = params['notFirst']);
-  }
-
-  
+  ngOnInit(){}
 
   @HostListener('animationend', ['$event']) animationEnd(event: AnimationEvent){
     switch(event.animationName){
@@ -34,14 +29,6 @@ export class HomeComponent {
         break;
       case "line-two-fade-in":
         this.twoReady = true;
-        setTimeout(() => {
-          if(!this.firstVisit){
-            this.goToAbout = true;
-            setTimeout(() => {
-              this.router.navigate(['/about']);
-            }, 1000);
-          }
-        }, 1000);
         break;
       default:
         break;

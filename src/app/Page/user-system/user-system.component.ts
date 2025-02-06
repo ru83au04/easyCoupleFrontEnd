@@ -7,41 +7,26 @@ import { AuthService } from '../../Service/auth.service';
 import { RegistComponent } from './regist/regist.component';
 import { LoginComponent } from './login/login.component';
 import { UserAlertComponent } from './user-alert/user-alert.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-system',
-  imports: [
-    FormsModule,
-    NgIf,
-    RegistComponent,
-    LoginComponent,
-    UserAlertComponent,
-  ],
+  imports: [FormsModule, NgIf, RegistComponent, LoginComponent, UserAlertComponent],
   templateUrl: './user-system.component.html',
   styleUrls: ['./user-system.component.css'],
 })
 export class UserSystemComponent {
   alert = new UserAlertComponent();
   alertMessage: string = '';
-  name?: string;
-  password?: string;
-  checkPassword?: string;
-  loginName: string = '';
-  loginPassword: string = '';
-  register: boolean = false;
-  deleteId: number = 0;
-  searchId: number = 0;
-
-  //TODO: 新使用方式
   showAlert: boolean = false;
   showRegistPage: boolean = false;
   showLoginPage: boolean = false;
 
-  constructor(private userSrv: UserService, private authSrv: AuthService) {}
+  constructor(private userSrv: UserService, private authSrv: AuthService, private router: Router) {}
 
   ngOnInit() {}
 
-  // TODO: 註冊使用者頁面開啟
+  // NOTE: 註冊使用者頁面開啟
   showPage(type: string) {
     if (type === 'login') {
       this.showLoginPage = true;
@@ -51,7 +36,7 @@ export class UserSystemComponent {
       this.showLoginPage = false;
     }
   }
-  // TODO: 註冊使用者頁面關閉
+  // NOTE: 成功註冊或登入
   onFinish(event: Object) {
     let regist: registResult = event as registResult;
     if (regist.result) {
@@ -66,11 +51,19 @@ export class UserSystemComponent {
     }
     this.showAlert = true;
   }
-
+  // NOTE: 取消註冊或登入
+  onCancel(event: boolean){
+    this.showRegistPage = event;
+    this.showLoginPage = event;
+  }
+  // NOTE: 登入或註冊關閉 Alert視窗
   onClosedAlert(event: boolean) {
     this.showAlert = event;
+    if (localStorage.getItem('token')) {
+      // HACK: 後面要改到導向登入後的操作頁面
+      this.router.navigate(['/']);
+    }
   }
-
 
   // NOTE: 已登入的使用者查看資料
   async getUserInfo(id: number) {
@@ -82,7 +75,7 @@ export class UserSystemComponent {
         return;
       }
       this.userSrv.getUserInfo(token, id).subscribe({
-        next: (data) => {
+        next: data => {
           if (data.status === 200) {
             // TODO: 跳出提醒視窗
             console.log('查詢成功');
@@ -93,7 +86,7 @@ export class UserSystemComponent {
             console.log('查詢失敗');
           }
         },
-        error: (error) => {
+        error: error => {
           // TODO: 跳出提醒視窗
           console.log(`查詢失敗：${error.status}`, error.message);
           throw error;
@@ -114,7 +107,7 @@ export class UserSystemComponent {
       }
       if (id && id !== 0) {
         this.userSrv.deleteUser(token, id).subscribe({
-          next: (data) => {
+          next: data => {
             if (data.status === 200) {
               console.log('刪除成功');
             } else {
@@ -122,7 +115,7 @@ export class UserSystemComponent {
               console.log('不明原因刪除失敗');
             }
           },
-          error: (error) => {
+          error: error => {
             // TODO: 跳出提醒視窗
             console.log(`刪除失敗：${error.status}`, error.message);
             throw error;
