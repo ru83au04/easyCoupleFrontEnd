@@ -6,6 +6,7 @@ import { WeatherService } from './Service/weather.service';
 import { MapService } from './Service/map.service';
 import { BlogService } from './Service/blog.service';
 import { UserService } from './Service/user.service';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,6 +16,6 @@ export const appConfig: ApplicationConfig = {
     WeatherService,
     MapService,
     BlogService,
-    UserService,
+    UserService, provideAnimationsAsync(),
   ]
 };

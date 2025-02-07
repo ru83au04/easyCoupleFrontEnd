@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/azure-blue.css'; /* 替換成您選擇的主題 */
+
 @font-face {
     font-family: 'jf-open';
     src: url('../fonts/jf-openhuninn-2.1.ttf') format('truetype');
@@ -7,7 +9,6 @@
 }
 :root{
     --text-color: rgba(244, 228, 198, 1);
-    /* --title-color: #688c8a; */
     --title-color: #1a3d59;
     --main-color: rgba(0, 0, 0, 0.865);
     --second-color: rgba(5, 176, 250, 0.906);
@@ -83,3 +84,6 @@ option {
 }
 
 
+
+html, body { height: 100%; }
+/* body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */

@@ -59,9 +59,9 @@ export class UserSystemComponent {
   // NOTE: 登入或註冊關閉 Alert視窗
   onClosedAlert(event: boolean) {
     this.showAlert = event;
-    if (localStorage.getItem('token')) {
-      // HACK: 後面要改到導向登入後的操作頁面
-      this.router.navigate(['/']);
+    if (sessionStorage.getItem('easy_couple_token')) {
+      // TODO: 後面要改成，登入成功只出現 toast淡出並自動轉跳至操作頁面
+      this.router.navigate(['/user-operation']);
     }
   }
 

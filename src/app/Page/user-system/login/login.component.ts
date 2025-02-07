@@ -1,15 +1,18 @@
 import { Component } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
 import { UserService } from '../../../Service/user.service';
-import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatCardModule} from '@angular/material/card';
 
 @Component({
   selector: 'app-login',
-  imports: [NgIf, FormsModule],
+  imports: [FormsModule, MatButtonModule, MatInputModule, MatFormFieldModule, MatCardModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   @Output() finishLogin = new EventEmitter<Object>();
@@ -30,7 +33,7 @@ export class LoginComponent {
       this.userSrv.loginUser(this.loginName, this.loginPassword).subscribe({
         next: (data) => {
           if (data.status === 200) {
-            localStorage.setItem('token', data.data[0]);
+            sessionStorage.setItem('easy_couple_token', data.data[0]);
             this.loginName = '';
             this.loginPassword = '';
             this.finish(true, '登入成功');

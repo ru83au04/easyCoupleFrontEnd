@@ -38,7 +38,7 @@ export class AppComponent {
   @HostListener('window:scroll', [])
   onWindowScroll() {
     const scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    const threshold = 100; // 捲動超過 100px 時隱藏 head
+    const threshold = 300; // 捲動超過 100px 時隱藏 head
 
     this.headHidden = scrollTop > threshold;
   }
