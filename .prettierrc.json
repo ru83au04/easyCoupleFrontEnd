@@ -3,7 +3,7 @@
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "printWidth": 1000,               
+    "printWidth": 500,               
     "tabWidth": 2,                  
     "useTabs": false,               
     "semi": true,                   

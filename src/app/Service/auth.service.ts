@@ -5,18 +5,29 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private currentUserSubject?: BehaviorSubject<User>;
-  public currentUser?: Observable<User>;
+  private user: User = {
+    id: 1,
+    real_name: '',
+    role_id: '',
+    department_id: '',
+    username: '',
+    emergency: '',
+    address: '',
+    start_date: new Date(),
+    special_date: 1,
+    special_date_delay: 1,
+  };
+  private currentUserSubject = new BehaviorSubject<User>(this.user);
+  public currentUser$ = this.currentUserSubject.asObservable();
 
   constructor() { }
   
   loginUser(user: User) {
-    this.currentUserSubject = new BehaviorSubject<User>(user);
-    this.currentUser = this.currentUserSubject.asObservable();
+    this.currentUserSubject.next(user);
   }
   logoutUser() {
+    this.currentUserSubject.next(this.user);
     this.currentUserSubject?.unsubscribe();
-    this.currentUser = undefined;
   }
 }
 

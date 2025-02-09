@@ -123,7 +123,7 @@ export class UserOperationComponent {
           next: data => {
             if (data.status === 200) {
               this.authSrv.loginUser(data.data[0]);
-              this.authSrv.currentUser?.subscribe({
+              this.authSrv.currentUser$.subscribe({
                 next: data => {
                   this.userName = data.real_name;
                 },
