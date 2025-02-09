@@ -1,7 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { RouterModule, RouterOutlet } from '@angular/router';
-import { UserSystemComponent } from '../user-system/user-system.component';
 
 @Component({
   selector: 'app-project',
@@ -28,7 +27,6 @@ export class ProjectComponent {
 
   ngOnInit() {
     this.list = true;
-    console.log('project component init', this.list);
   }
 
   // NOTE: 打開專案

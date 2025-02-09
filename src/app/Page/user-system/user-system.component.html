@@ -3,7 +3,6 @@
     <div class="user-system-block" (click)="showPage('regist')">註冊</div>
     <div class="user-system-block" (click)="showPage('login')">登入</div>
   </div>
-  <app-regist *ngIf="showRegistPage" (finishRegist)="onFinish($event)" (cancel)="onCancel($event)"></app-regist>
-  <app-login *ngIf="showLoginPage" (finishLogin)="onFinish($event)" (cancel)="onCancel($event)"></app-login>
+  <app-regist *ngIf="showRegistPage" (close)="onCancel($event)"></app-regist>
+  <app-login *ngIf="showLoginPage" (cancel)="onCancel($event)"></app-login>
 </div>
-<app-user-alert *ngIf="showAlert" (closeAlert)="onClosedAlert($event)" [alertMessage]="alertMessage"></app-user-alert>

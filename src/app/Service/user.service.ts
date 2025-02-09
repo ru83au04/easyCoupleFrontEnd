@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +10,9 @@ import { Observable } from 'rxjs';
 export class UserService {
   rootUrl = environment.rootURL;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authSrv: AuthService) { }
 
-  /* NOTE: 確認使用者，發送API
+  /** 確認使用者，發送API
     * @param name: string - 使用者名稱
     * @param password: string - 使用者密碼
     * @return Observable<HttpResult> - 回傳HttpResult
@@ -21,7 +22,7 @@ export class UserService {
     let params = new HttpParams().set('username', name).set('password', password);
     return this.http.get<HttpResult>(`${this.rootUrl}/api/user/check`, { params });
   }
-  /* NOTE: 註冊使用者，發送API
+  /** 註冊使用者，發送API
     * @param name: string - 使用者名稱
     * @param password: string - 使用者密碼
     * @param user: User - 使用者資料
@@ -37,10 +38,12 @@ export class UserService {
       .set('address', user.address)
       .set('start_date', user.start_date.toString())
       .set('role_id', user.role_id)
-      .set('department_id', user.department_id);
+      .set('department_id', user.department_id)
+      .set('phone', user.phone)
+      .set('emergency_phone', user.emergency_phone);
     return this.http.get<HttpResult>(`${this.rootUrl}/api/user/register`, { params });       
   }
-  /* NOTE: 登入使用者，發送API
+  /** 登入使用者，發送API
     * @param name: string - 使用者名稱
     * @param password: string - 使用者密碼
     * @return Observable<HttpResult> - 回傳HttpResult
@@ -50,17 +53,16 @@ export class UserService {
     let params = new HttpParams().set('username', name).set('password', password);
     return this.http.get<HttpResult>(`${this.rootUrl}/api/user/login`, { params });
   }
-  /* NOTE: 取得使用者資訊，發送API
+  logoutUser(){
+    sessionStorage.removeItem('easy_couple_token');
+  }
+  /** 取得使用者資訊，發送API
     * @param token: string - 使用者Token
     * @return Observable<HttpResult> - 回傳HttpResult
     * 回傳 data為 User物件
   */
-  getUserInfo(token: string, id: number): Observable<HttpResult> {
+  getUserInfo(token: string): Observable<HttpResult> {
     let headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    if (id !== 0) {
-      let params = new HttpParams().set('id', id);
-      return this.http.get<HttpResult>(`${this.rootUrl}/api/user/info`, { headers, params });
-    }
     return this.http.get<HttpResult>(`${this.rootUrl}/api/user/info`, { headers });
   }
   deleteUser(token: string, id: number): Observable<HttpResult> {

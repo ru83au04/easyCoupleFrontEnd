@@ -1,28 +1,26 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../Service/user.service';
+import { AlertService } from '../../Service/alert.service';
 import { NgIf } from '@angular/common';
-import { User } from '../../Service/auth.service';
 import { AuthService } from '../../Service/auth.service';
 import { RegistComponent } from './regist/regist.component';
 import { LoginComponent } from './login/login.component';
-import { UserAlertComponent } from './user-alert/user-alert.component';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-system',
-  imports: [FormsModule, NgIf, RegistComponent, LoginComponent, UserAlertComponent],
+  imports: [FormsModule, NgIf, RegistComponent, LoginComponent],
   templateUrl: './user-system.component.html',
   styleUrls: ['./user-system.component.css'],
 })
 export class UserSystemComponent {
-  alert = new UserAlertComponent();
   alertMessage: string = '';
   showAlert: boolean = false;
   showRegistPage: boolean = false;
   showLoginPage: boolean = false;
 
-  constructor(private userSrv: UserService, private authSrv: AuthService, private router: Router) {}
+  constructor(private userSrv: UserService, private alertSrv: AlertService, private router: Router) {}
 
   ngOnInit() {}
 
@@ -36,21 +34,7 @@ export class UserSystemComponent {
       this.showLoginPage = false;
     }
   }
-  // NOTE: 成功註冊或登入
-  onFinish(event: Object) {
-    let regist: registResult = event as registResult;
-    if (regist.result) {
-      this.alertMessage = regist.message;
-      this.alert.Alert(() => {
-        this.showRegistPage = false;
-        this.showLoginPage = false;
-      });
-    } else {
-      this.alertMessage = regist.message;
-      this.alert.Alert(() => {});
-    }
-    this.showAlert = true;
-  }
+  
   // NOTE: 取消註冊或登入
   onCancel(event: boolean){
     this.showRegistPage = event;
@@ -64,39 +48,7 @@ export class UserSystemComponent {
       this.router.navigate(['/user-operation']);
     }
   }
-
-  // NOTE: 已登入的使用者查看資料
-  async getUserInfo(id: number) {
-    try {
-      let token = localStorage.getItem('token');
-      if (!token) {
-        // TODO: 跳出提醒視窗
-        console.log('請先登入');
-        return;
-      }
-      this.userSrv.getUserInfo(token, id).subscribe({
-        next: data => {
-          if (data.status === 200) {
-            // TODO: 跳出提醒視窗
-            console.log('查詢成功');
-            let user: User = data.data[0];
-            this.authSrv.loginUser(user);
-          } else {
-            // TODO: 跳出提醒視窗
-            console.log('查詢失敗');
-          }
-        },
-        error: error => {
-          // TODO: 跳出提醒視窗
-          console.log(`查詢失敗：${error.status}`, error.message);
-          throw error;
-        },
-      });
-    } catch (err) {
-      // TODO: 跳出提醒視窗
-      console.error('查詢失敗', err);
-    }
-  }
+  
   async deleteUser(id: number) {
     try {
       let token = localStorage.getItem('token');
@@ -129,10 +81,6 @@ export class UserSystemComponent {
       // TODO: 跳出提醒視窗
       console.error('刪除失敗', err);
     }
-  }
-  logoutUser() {
-    this.authSrv.logoutUser();
-    localStorage.removeItem('token');
   }
 }
 

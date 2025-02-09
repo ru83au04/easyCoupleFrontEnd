@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
 import { UserService } from '../../../Service/user.service';
+import { AlertService } from '../../../Service/alert.service';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,12 +23,12 @@ export class LoginComponent {
   loginName: string = '';
   loginPassword: string = '';
 
-  constructor(private userSrv: UserService) {}
+  constructor(private userSrv: UserService, private alert: AlertService, private router: Router) {}
 
   // NOTE: 登入使用者
   async loginUser() {
     if (this.loginName === '' || this.loginPassword === '') {
-      this.finish(false, '請輸入帳號or密碼');
+      this.alert.showAlert('請輸入帳號or密碼');
       return;
     }
     try {
@@ -36,27 +38,25 @@ export class LoginComponent {
             sessionStorage.setItem('easy_couple_token', data.data[0]);
             this.loginName = '';
             this.loginPassword = '';
-            this.finish(true, '登入成功');
+            this.alert.showAlert('登入成功',() => {
+              this.router.navigate(['/user-operation']);
+            });            
           } else {
             console.log('不明錯誤');
-            this.finish(false, '不明錯誤');
+            this.alert.showAlert('不明錯誤');
           }
         },
         error: (error: HttpErrorResponse) => {
           console.log(`登入失敗：${error.status}`, error.error.message);
-          this.finish(false, `登入失敗：${error.error.message}`);
+          this.alert.showAlert(`登入失敗：${error.error.message}`);
         },
       });
     } catch (err) {
-      this.finish(false, '登入失敗');
+      this.alert.showAlert('登入失敗');
       console.error('登入失敗', err);
     }
   }
   cancelLogin(){
     this.cancel.emit(false);
-  }
-
-  finish(result: boolean, message: string) {
-    this.finishLogin.emit({ result, message });
   }
 }

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +23,6 @@ export class AuthService {
 export interface User {
   id: number;
   real_name: string;
-  level: number;
   role_id: string;
   department_id: string;
   username: string;
@@ -33,18 +31,14 @@ export interface User {
   start_date: Date;
   special_date: number;
   special_date_delay: number;
-  rank: string;
-  regist_date: Date;
 }
 
 export enum Roles{
-  employee = 1,
-  manager = 2,
-  admin = 3
+  EMPLOYEE = 1,
+  MANAGER = 2,
 }
 
 export enum Departments{
-  department1 = 1,
-  department2 = 2,
-  department3 = 3
+  BACK = 1,
+  FRONT = 2,
 }

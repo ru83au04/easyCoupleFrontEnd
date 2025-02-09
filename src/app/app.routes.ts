@@ -24,5 +24,13 @@ export const routes: Routes = [
   { path: 'external/:path', component: ExternalComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'user-operation', component: UserOperationComponent },
+  {
+    path: 'user-operation',
+    component: UserOperationComponent,
+    children: [
+      { path: 'user-calendar', loadComponent: () => import('./Page/user-operation/user-calendar/user-calendar.component').then(m => m.UserCalendarComponent) },
+      { path: 'user-info', loadComponent: () => import('./Page/user-operation/user-info/user-info.component').then(m => m.UserInfoComponent) },
+      { path: 'attendance', loadComponent: () => import('./Page/user-operation/attendance/attendance.component').then(m => m.AttendanceComponent) },
+    ],
+  },
 ];
