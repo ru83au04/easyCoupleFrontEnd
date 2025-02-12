@@ -1,6 +1,6 @@
-<main>
+<main class="container">
     <!-- <button (click)="findFood()">找食物</button> -->
-    <div class="button_container">
+    <div class="button-container">
       <select [(ngModel)]="selectedArea">
         <option value="" disabled>請選擇地區</option>
         <option *ngFor="let area of areas" [value]="area.area">{{ area.area }}</option>
@@ -12,5 +12,5 @@
       <button (click)="search(selectedArea, selectedTIme)">搜尋</button>
       <button (click)="clearMarkers()">清除搜尋結果</button>
     </div>
-    <div #mapContainer class="map_container"></div>
+    <div #mapContainer class="map-container"></div>
 </main>

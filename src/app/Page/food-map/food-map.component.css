@@ -1,11 +1,46 @@
-.map_container{
-    height:500px;
-    margin: 0px;
+.container{
+    width: 100%;
 }
 
-.button_container{
+.map-container{
+    height: 300px;
+    justify-content: center;
+    align-items: space-around;
+    margin: 30px;
+}
+
+.button-container{
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: space-around;
     margin: 10px;
+}
+
+button{
+    margin: 10px;
+    font-size: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+@media (max_width: 786px){
+    button{
+        width: 100px;
+    }
+}
+
+@media (max-width: 576px){
+    .button-container{
+        margin: 10px;
+        align-items: space-evenly;
+    }
+    button{
+        width: fit-content;
+        font-size: 0.8rem;
+    }
+    select {
+        font-size: 0.6rem;
+        padding: 8px;
+        width: 80px;
+    }
 }

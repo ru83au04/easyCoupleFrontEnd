@@ -24,9 +24,9 @@
 
 #author {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 2px;
     height: 30px;
 }
 

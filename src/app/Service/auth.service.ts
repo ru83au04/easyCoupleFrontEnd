@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private user: User = {
@@ -17,17 +17,16 @@ export class AuthService {
     special_date: 1,
     special_date_delay: 1,
   };
-  private currentUserSubject = new BehaviorSubject<User>(this.user);
-  public currentUser$ = this.currentUserSubject.asObservable();
+  private currentUserSubject: BehaviorSubject<User> = new BehaviorSubject<User>(this.user);
+  public currentUser$? = this.currentUserSubject!.asObservable();
 
-  constructor() { }
-  
-  loginUser(user: User) {
+  constructor() {}
+
+  loginUser(user: User) {   
     this.currentUserSubject.next(user);
   }
   logoutUser() {
-    this.currentUserSubject.next(this.user);
-    this.currentUserSubject?.unsubscribe();
+    this.currentUserSubject!.next(this.user);
   }
 }
 

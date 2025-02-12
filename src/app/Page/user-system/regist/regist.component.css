@@ -16,11 +16,6 @@
     width: 300px;
 }
 
-.operation{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 .step2{
     display: flex;
     flex-direction: column;
@@ -54,4 +49,21 @@ select{
     background: white;
     width: 200px;
     color: black;
+}
+
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin: 10px;
+}
+
+button {
+    height: 40px;
+    width: 80px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: var(--title-color);
+    color: var(--text-color);
+    font-size: none;
 }

@@ -3,6 +3,7 @@ import { NgFor } from '@angular/common';
 import { MapService } from '../../Service/map.service';
 import { environment } from '../../../environments/environment';
 import { FormsModule } from '@angular/forms';
+import { AlertService } from '../../Service/alert.service';
 
 @Component({
   selector: 'app-food-map',
@@ -20,7 +21,7 @@ export class FoodMapComponent {
   selectedArea: string = "";
   selectedTIme: string = "";
 
-  constructor(private mapSrv: MapService){}
+  constructor(private mapSrv: MapService, private alert: AlertService){}
 
   /* NOTE:
     1. 頁面初始化的時候，建立行政區清單與時間選項清單
@@ -42,6 +43,7 @@ export class FoodMapComponent {
       this.mapSrv.initMap(this.mapContainer);      
     } catch (err) {
       console.error('Google Maps 加載失敗', err);
+      
     }  
   }
   // NOTE: 建立行政區清單(做為選項清單，所以結果不重複)
@@ -58,7 +60,7 @@ export class FoodMapComponent {
   // NOTE: 選定指定條件後搜尋並建立地標(指定地點或指定地點、時間)
   async search(area: string, time: string) {
     if(area === ""){
-      console.log("地點不得為空");
+      this.alert.showAlert("地點不得為空");
       return;
     }
     if (time === "" && area !== "") {

@@ -76,7 +76,7 @@ export class MapService {
       content: this.createCustomMarkerContent(),
     });
 
-    mapElement.style.margin = '80px';
+    mapElement.style.margin = '30px';
   }
   // NOTE: 將使用者位置圖示放入地圖
   createCustomMarkerContent() {

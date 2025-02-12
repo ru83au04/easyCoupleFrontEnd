@@ -24,5 +24,12 @@
     transform: translate(10px, -10px);
     transition: transform 0.3s ease;
     box-shadow: -2px 2px 5px 2px rgba(255, 255, 255, 0.5);
+}
 
+@media (max-width: 576px){
+    .user-system-block {
+        width: 150px;
+        height: 100px;
+        font-size: 1.5rem;
+    }
 }

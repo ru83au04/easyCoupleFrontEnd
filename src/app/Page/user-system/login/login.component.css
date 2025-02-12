@@ -17,6 +17,7 @@
     width: 300px;
 }
 
+
 input{
     margin: 10px;
     padding: 10px;
@@ -24,4 +25,21 @@ input{
     border: 1px solid #ccc;
     width: 200px;
     height: 10px;
+}
+
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin: 10px;
+}
+
+button {
+    height: 40px;
+    width: 80px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: var(--title-color);
+    color: var(--text-color);
+    font-size: none;
 }

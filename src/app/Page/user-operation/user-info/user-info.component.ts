@@ -39,8 +39,7 @@ import { Observable } from 'rxjs';
 })
 export class UserInfoComponent {
   @ViewChild('infoDetail') infoDetail!: ElementRef;
-  userDataChange: Observable<User> = new Observable<User>();
-  currentUser!: User;
+  userDataChange$!: Observable<User>;
   userName!: string;
   userData: MatTableDataSource<{ property: string; value: string }> = new MatTableDataSource();
   displayedColumns: string[] = ['property', 'value'];
@@ -48,12 +47,11 @@ export class UserInfoComponent {
   constructor(private auth: AuthService) {}
 
   ngOnInit() {
-    this.userDataChange = this.auth.currentUser$;
+    this.userDataChange$ = this.auth.currentUser$!;
     
-    this.auth.currentUser$.subscribe({
+    this.userDataChange$!.subscribe({
       next: user => {
-        this.currentUser = user;
-        this.setUserData();
+        this.setUserData(user);
       },
       error: err => {
         console.error(err);
@@ -61,19 +59,19 @@ export class UserInfoComponent {
     });
   }
 
-  // ngAfterViewInit() {
-  //   this.setUserData();
-  // }
+  ngAfterViewInit() {
+    
+  }
 
-  setUserData() {
+  setUserData(user: User) {
     this.userData.data = [
-      { property: '姓名', value: this.currentUser.real_name },
-      { property: '角色', value: this.currentUser.role_id.toString() },
-      { property: '部門', value: this.currentUser.department_id.toString() },
-      { property: '帳號', value: this.currentUser.username },
-      { property: '緊急聯絡人', value: this.currentUser.emergency },
-      { property: '地址', value: this.currentUser.address },
-      { property: '到職日期', value: this.currentUser.start_date.toString() },
+      { property: '姓名', value: user.real_name },
+      { property: '角色', value: user.role_id.toString() },
+      { property: '部門', value: user.department_id.toString() },
+      { property: '帳號', value: user.username },
+      { property: '緊急聯絡人', value: user.emergency },
+      { property: '地址', value: user.address },
+      { property: '到職日期', value: user.start_date.toString() },
       // { property: '特休天數', value: this.currentUser.special_date.toString() },
       // { property: '特休天數延後', value: this.currentUser.special_date_delay.toString() },
     ];

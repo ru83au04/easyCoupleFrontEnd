@@ -4,23 +4,35 @@
   gap: 30px;
   padding: 50px;
 }
-app-guidblock{
+
+app-guidblock {
   overflow: hidden;
   align-items: center;
   border-radius: 25px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
 }
-app-guidblock:hover{
+
+app-guidblock:hover {
   transform: translate(10px, -10px);
-  box-shadow: 0 4px 8px rgb(255, 255, 255),
-              0 6px 20px rgba(255, 255, 255, 0.662),
-              0 8px 30px rgba(255, 255, 255, 0.364);
+  box-shadow: 0 4px 8px rgb(255, 255, 255), 0 6px 20px rgba(255, 255, 255, 0.662), 0 8px 30px rgba(255, 255, 255, 0.364);
   border-radius: 25px;
   cursor: pointer;
 }
 
-app-article{
+app-article {
   gap: 30px;
   padding: 50px;
+}
+
+@media (max-width: 992px) {
+  #articles {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 786px) {
+  #articles {
+    grid-template-columns: 1fr;
+  }
 }
