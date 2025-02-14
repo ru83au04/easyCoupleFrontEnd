@@ -5,14 +5,15 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
+  // HACK: 開發用
   private user: User = {
     id: 1,
-    real_name: '',
-    role_id: '',
-    department_id: '',
-    username: '',
-    emergency: '',
-    address: '',
+    real_name: '王紹安',
+    role_id: '1',
+    department_id: '1',
+    username: 'ru83au04 ',
+    emergency: '羅翊慈',
+    address: '台南某處',
     start_date: new Date(),
     special_date: 1,
     special_date_delay: 1,

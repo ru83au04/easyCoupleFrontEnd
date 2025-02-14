@@ -6,7 +6,7 @@ import { TimecounterComponent } from '../../Kennel/timecounter/timecounter.compo
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ NgClass, TimecounterComponent],
+  imports: [ NgClass],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   encapsulation: ViewEncapsulation.None  // 禁用樣式封裝

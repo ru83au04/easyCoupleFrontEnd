@@ -43,9 +43,15 @@ import { AlertService } from '../../Service/alert.service';
         display: flex;
         flex-direction: column;
       }
+
       mat-toolbar {
         height: fit-content;
         display: flex;
+      }
+
+      mat-icon{
+        margin: 0px;
+        padding: 0px;
       }
 
       .user {
@@ -66,8 +72,7 @@ import { AlertService } from '../../Service/alert.service';
       }
 
       mat-icon {
-        width: fit-content;
-        margin: 10px;
+        padding: 10px;
       }
 
       .user-info p {
@@ -107,7 +112,8 @@ import { AlertService } from '../../Service/alert.service';
   ],
 })
 export class UserOperationComponent {
-  userName!: string;
+  // HACK: 開發用
+  userName: string = "王紹安";
   constructor(private userSrv: UserService, private authSrv: AuthService, private alert: AlertService, private router: Router) {}
 
   ngOnInit() {

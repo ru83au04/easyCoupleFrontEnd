@@ -9,23 +9,25 @@ import { Observable } from 'rxjs';
   imports: [MatTableModule],
   template: `
     <main class="container">
-      <table mat-table [dataSource]="userData" class="mat-elevation-z8">
-        <!-- 定義列 -->
-        <ng-container matColumnDef="property">
-          <th mat-header-cell *matHeaderCellDef>屬性</th>
-          <td mat-cell *matCellDef="let element">{{ element.property }}</td>
-        </ng-container>
+      <div class="table-container">
+        <table mat-table [dataSource]="userData" class="mat-elevation-z8">
+          <!-- 定義列 -->
+          <ng-container matColumnDef="property">
+            <th class="table-header" mat-header-cell *matHeaderCellDef>項目</th>
+            <td mat-cell *matCellDef="let element">{{ element.property }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="value">
-          <th mat-header-cell *matHeaderCellDef>值</th>
-          <td mat-cell *matCellDef="let element">{{ element.value }}</td>
-        </ng-container>
+          <ng-container matColumnDef="value">
+            <th class="table-header" mat-header-cell *matHeaderCellDef>內容</th>
+            <td mat-cell *matCellDef="let element">{{ element.value }}</td>
+          </ng-container>
 
-        <!-- 標題行 -->
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <!-- 資料行 -->
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
+          <!-- 標題行 -->
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <!-- 資料行 -->
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
     </main>
   `,
   styles: [
@@ -33,6 +35,21 @@ import { Observable } from 'rxjs';
       .container {
         display: flex;
         height: 100%;
+        padding: 20px;
+      }
+
+      .table-container table {
+        background-color: transparent;
+      }
+
+      .table-container table .table-header {
+        background-color: rgb(173, 0, 0);
+        border-radius: 10px;
+      }
+      td {
+        border-radius: 10px;
+        // background-color: rgb(168, 0, 0);
+        color: rgb(168, 0, 0);
       }
     `,
   ],
@@ -48,7 +65,7 @@ export class UserInfoComponent {
 
   ngOnInit() {
     this.userDataChange$ = this.auth.currentUser$!;
-    
+
     this.userDataChange$!.subscribe({
       next: user => {
         this.setUserData(user);
@@ -59,9 +76,7 @@ export class UserInfoComponent {
     });
   }
 
-  ngAfterViewInit() {
-    
-  }
+  ngAfterViewInit() {}
 
   setUserData(user: User) {
     this.userData.data = [

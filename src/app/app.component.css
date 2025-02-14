@@ -1,122 +1,134 @@
-.main-container{
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow-y: hidden;
+.main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: hidden;
 }
 
 #head {
-    display: flex;
-    padding: 5px;
-    border-radius: 25px;
-    margin-top: 20px;
-    margin-right: 20px;
-    margin-left: 20px;
-    margin-bottom: 10px;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
-    background-color: var(--title-color);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+  display: flex;
+  padding: 5px;
+  border-radius: 25px;
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+  background-color: var(--title-color);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .head-hidden {
-    opacity: 0;
-    transform: translateY(-100%);
-    height: 0px;
+  opacity: 0;
+  transform: translateY(-100%);
+  height: 0px;
 }
-  
-  /* 按鈕懸停效果 */
+
+/* 按鈕懸停效果 */
 button:hover {
-    transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 /* 按鈕按下效果 */
 button:active {
-    transform: translateY(1px);
+  transform: translateY(1px);
 }
 
-.app-root{
-    flex-grow: 1;
-    overflow-y: auto;
+.app-root {
+  flex-grow: 1;
+  overflow-y: auto;
 }
 
-.name-size{
-    font-size: 6rem;
+.name-size {
+  font-size: 6rem;
 }
 
-.en-name-size{
-    font-size: 3rem;
+.en-name-size {
+  font-size: 3rem;
 }
 
-.name-start{
-    margin-left: 10px;
-    border: 5px solid #c79902;
-    border-radius: 15px;
+.name-start {
+  margin-left: 10px;
+  border: 5px solid #c79902;
+  border-radius: 15px;
 }
 
-.first-name{
-    display: flex;
-    flex-direction: column;
+.first-name {
+  display: flex;
+  flex-direction: column;
 }
 
 #head-title {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
-.en-name{
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+.en-name {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
 /* 讓按鈕在水平方向上排列在一起 */
 #button-container {
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    gap: 100px;
-    margin: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 100px;
+  margin: 20px;
 }
 
+/* HACK: .head-hidden的使用方式看看有沒有其他方法可以修改，盡量不要使用 important */
+
 @media (max-width: 992px) {
-    .head{
-        height: 110px;
-    }
-    .name-size{
-        font-size: 4rem;
-    }
-    .en-name-size{
-        font-size: 1.5rem;
-    }
-    #button-container {
-        gap: 30px;
-        margin: 10px
-    }   
+  #head {
+    height: 85px;
+  }
+  .head-hidden {
+    opacity: 0;
+    transform: translateY(-100%);
+    height: 0px !important;
+  }
+  .name-size {
+    font-size: 4rem;
+  }
+  .en-name-size {
+    font-size: 1.5rem;
+  }
+  #button-container {
+    gap: 30px;
+    margin: 10px;
+  }
 }
 
 @media (max-width: 786px) {
-    #button-container {
-        gap: 30px;
-        margin: 10px
-    }   
+  #button-container {
+    gap: 30px;
+    margin: 10px;
+  }
 }
 
 @media (max-width: 576px) {
-    .head{
-        height: 80px;
-    }
-    .name-size{
-        font-size: 3rem;
-    }
-    .en-name-size{
-        font-size: 1rem;
-    }
-    #button-container {
-        gap: 0px;
-        margin: 10px
-    }   
+  #head {
+    height: 65px;
+    margin: 5px;
+  }
+  .head-hidden {
+    opacity: 0;
+    transform: translateY(-100%);
+    height: 0px !important;
+  }
+  .name-size {
+    font-size: 3rem;
+  }
+  .en-name-size {
+    font-size: 1rem;
+  }
+  #button-container {
+    gap: 0px;
+    margin: 10px;
+  }
 }
 
 @media (max-width: 320px) {
-    
 }
