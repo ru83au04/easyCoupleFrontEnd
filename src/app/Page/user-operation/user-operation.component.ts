@@ -49,7 +49,7 @@ import { AlertService } from '../../Service/alert.service';
         display: flex;
       }
 
-      mat-icon{
+      mat-icon {
         margin: 0px;
         padding: 0px;
       }
@@ -113,7 +113,7 @@ import { AlertService } from '../../Service/alert.service';
 })
 export class UserOperationComponent {
   // HACK: 開發用
-  userName: string = "王紹安";
+  userName: string = '王紹安';
   constructor(private userSrv: UserService, private authSrv: AuthService, private alert: AlertService, private router: Router) {}
 
   ngOnInit() {

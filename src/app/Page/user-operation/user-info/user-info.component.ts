@@ -3,6 +3,7 @@ import { AuthService, User } from '../../../Service/auth.service';
 import { MatTableModule } from '@angular/material/table';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-user-info',
@@ -18,13 +19,11 @@ import { Observable } from 'rxjs';
           </ng-container>
 
           <ng-container matColumnDef="value">
-            <th class="table-header" mat-header-cell *matHeaderCellDef>內容</th>
+            <th class="table-header content" mat-header-cell *matHeaderCellDef>內容</th>
             <td mat-cell *matCellDef="let element">{{ element.value }}</td>
           </ng-container>
 
-          <!-- 標題行 -->
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <!-- 資料行 -->
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
       </div>
@@ -43,16 +42,25 @@ import { Observable } from 'rxjs';
       }
 
       .table-container table .table-header {
-        background-color: rgb(173, 0, 0);
+        text-align: center;
+        color: var(--text-color);
+        background-color: var(--title-color);
         border-radius: 10px;
       }
+
       td {
+        text-align: center;
+        color: var(--text-color);
         border-radius: 10px;
-        // background-color: rgb(168, 0, 0);
-        color: rgb(168, 0, 0);
       }
+
+      .content{
+        width: 400px;
+      }
+      
     `,
   ],
+  providers: [DatePipe],
 })
 export class UserInfoComponent {
   @ViewChild('infoDetail') infoDetail!: ElementRef;
@@ -61,7 +69,7 @@ export class UserInfoComponent {
   userData: MatTableDataSource<{ property: string; value: string }> = new MatTableDataSource();
   displayedColumns: string[] = ['property', 'value'];
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private datePipe: DatePipe) {}
 
   ngOnInit() {
     this.userDataChange$ = this.auth.currentUser$!;
@@ -81,12 +89,12 @@ export class UserInfoComponent {
   setUserData(user: User) {
     this.userData.data = [
       { property: '姓名', value: user.real_name },
-      { property: '角色', value: user.role_id.toString() },
+      { property: '職務', value: user.role_id.toString() },
       { property: '部門', value: user.department_id.toString() },
       { property: '帳號', value: user.username },
       { property: '緊急聯絡人', value: user.emergency },
       { property: '地址', value: user.address },
-      { property: '到職日期', value: user.start_date.toString() },
+      { property: '到職日期', value: this.datePipe.transform(user.start_date, 'yyyy-MM-dd')!.toString() },
       // { property: '特休天數', value: this.currentUser.special_date.toString() },
       // { property: '特休天數延後', value: this.currentUser.special_date_delay.toString() },
     ];
