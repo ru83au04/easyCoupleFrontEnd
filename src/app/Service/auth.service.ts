@@ -5,7 +5,6 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  token!: string;
   private user: User = {
     id: 0,
     username: '',
@@ -17,8 +16,8 @@ export class AuthService {
     start_date: new Date(),
     special_date: 0,
     special_date_delay: 0,
-    role_id: 0,
-    department_id: 0,
+    role: '',
+    department: '',
   };
   private currentUserSubject: BehaviorSubject<User> = new BehaviorSubject<User>(this.user);
   public currentUser$? = this.currentUserSubject!.asObservable();
@@ -27,10 +26,33 @@ export class AuthService {
 
   loginUser(user: User) {
     this.currentUserSubject.next(user);
-    this.token = sessionStorage.getItem('easy_couple_token')!;
   }
   logoutUser() {
     this.currentUserSubject!.next(this.user);
+  }
+  refreshUser(user: User){
+    this.currentUserSubject.next(user);
+  }
+
+  getRole(role: number): string {
+    switch (role) {
+      case 1:
+        return '主管';
+      case 2:
+        return '職員';
+      default:
+        return '未知';
+    }
+  }
+  getDepartment(department: number): string {
+    switch (department) {
+      case 1:
+        return '後端';
+      case 2:
+        return '前端';
+      default:
+        return '未知';
+    }
   }
 }
 
@@ -45,8 +67,8 @@ export interface User {
   start_date: Date;
   special_date: number;
   special_date_delay: number;
-  role_id: number;
-  department_id: number;
+  role: string;
+  department: string;
 }
 
 export enum Roles {

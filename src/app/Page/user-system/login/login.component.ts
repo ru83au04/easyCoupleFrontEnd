@@ -39,8 +39,8 @@ export class LoginComponent {
             this.loginName = '';
             this.loginPassword = '';
             this.alert.showAlert('登入成功',() => {
-              this.router.navigate(['/user-operation']);
-            });            
+              this.router.navigate(['/user-operation/user-info']);
+            });
           } else {
             console.log('不明錯誤');
             this.alert.showAlert('不明錯誤');

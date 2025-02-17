@@ -2,15 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
-import { AuthService } from './auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   rootUrl = environment.rootURL;
+  private user?: User;
 
-  constructor(private http: HttpClient, private authSrv: AuthService) {}
+  constructor(private http: HttpClient) {}
 
   /** 確認使用者，發送API
    * @param name: string - 使用者名稱
@@ -74,7 +75,7 @@ export class UserService {
     let headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<HttpResult>(`${this.rootUrl}/api/user/info`, { headers });
   }
-  editUserInfo(body: any){
+  editUserInfo(body: any) {
     let token = sessionStorage.getItem('easy_couple_token');
     // TODO: 未登入時的處理
     if (!token) {
@@ -99,4 +100,29 @@ export interface HttpResult {
   status: number;
   message: string;
   data: any[];
+}
+
+export interface User {
+  id: number;
+  username: string;
+  real_name: string;
+  phone: string;
+  emergency: string;
+  emergency_phone: string;
+  address: string;
+  start_date: Date;
+  special_date: number;
+  special_date_delay: number;
+  role_id: number;
+  department_id: number;
+}
+
+export enum Roles {
+  MANAGER = 1,
+  EMPLOYEE = 2,
+}
+
+export enum Departments {
+  BACKEND = 1,
+  FRONTEND = 2,
 }

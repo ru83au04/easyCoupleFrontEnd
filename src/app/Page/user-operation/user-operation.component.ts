@@ -27,8 +27,10 @@ import { AlertService } from '../../Service/alert.service';
           </div>
         </div>
         <div class="button-container">
-          <button class="toolBarBtn" mat-button [routerLink]="['/user-operation/attendance']">出勤</button>
-          <button class="toolBarBtn" mat-button [routerLink]="['/user-operation/user-calendar']">行事曆</button>
+          <!-- <button class="toolBarBtn" mat-button [routerLink]="['/user-operation/attendance']">出勤</button> -->
+          <!-- <button class="toolBarBtn" mat-button [routerLink]="['/user-operation/user-calendar']">行事曆</button> -->
+          <button class="toolBarBtn" (click)="working()">出勤</button>
+          <button class="toolBarBtn" (click)="working()">行事曆</button>
           <button class="toolBarBtn" mat-button [routerLink]="['/user-operation/user-info']">個人資料</button>
         </div>
       </mat-toolbar>
@@ -137,13 +139,18 @@ export class UserOperationComponent {
   ngOnInit() {
     this.initAuth();
   }
-  
+  /**
+   * @description 取得登入者資訊並初始化
+   */
   initAuth() {
     try {
       this.userSrv.getUserInfo().subscribe({
         next: data => {
           if (data.status === 200) {
-            this.authSrv.loginUser(data.data[0]);
+            let loginUser = data.data[0];
+            loginUser.role = this.authSrv.getRole(loginUser.role_id);
+            loginUser.department = this.authSrv.getDepartment(loginUser.department_id);
+            this.authSrv.loginUser(loginUser);
             this.authSrv.currentUser$?.subscribe({
               next: data => {
                 this.userName = data.real_name;
@@ -162,6 +169,9 @@ export class UserOperationComponent {
       console.log(err);
     }
   }
+  /**
+   * @description 登出使用者並取消所有訂閱
+   */
   logout() {
     this.authSrv.logoutUser();
     this.userSrv.logoutUser();
@@ -172,5 +182,9 @@ export class UserOperationComponent {
         });
       }
     }, 100);
+  }
+
+  working() {
+    this.alert.showAlert('努力建置中');
   }
 }

@@ -146,8 +146,9 @@ import { AlertService } from '../../../Service/alert.service';
 export class UserInfoComponent {
   @ViewChild('tables') tables!: ElementRef;
   userDataChange$!: Observable<User>;
-  currentUser: UserInfo = {
-    user_name: '',
+  currentUser: User = {
+    id: 0,
+    username: '',
     real_name: '',
     phone: '',
     emergency: '',
@@ -172,7 +173,8 @@ export class UserInfoComponent {
     this.userDataChange$!.subscribe({
       next: user => {
         this.currentUser = {
-          user_name: user.username,
+          id: user.id,
+          username: user.username,
           real_name: user.real_name,
           phone: user.phone,
           emergency: user.emergency,
@@ -181,9 +183,9 @@ export class UserInfoComponent {
           start_date: user.start_date,
           special_date: user.special_date,
           special_date_delay: user.special_date_delay,
-          role: this.getRole(user.role_id),
-          department: this.getDepartment(user.department_id),
-        }
+          role: user.role,
+          department: user.department,
+        };
         this.setUserData(this.currentUser);
       },
       error: err => {
@@ -194,7 +196,7 @@ export class UserInfoComponent {
 
   ngAfterViewInit() {}
 
-  setUserData(user: UserInfo, editMode: boolean = false) {
+  setUserData(user: User, editMode: boolean = false) {
     if (editMode) {
       this.userData.data = [
         { property: '姓名', value: this.currentUser.real_name },
@@ -210,7 +212,7 @@ export class UserInfoComponent {
       { property: '連絡電話', value: user.phone},
       { property: '職務', value: user.role },
       { property: '部門', value: user.department },
-      { property: '帳號', value: user.user_name },
+      { property: '帳號', value: user.username },
       { property: '緊急聯絡人', value: user.emergency },
       { property: '緊急連絡電話', value: user.emergency_phone },
       { property: '地址', value: user.address },
@@ -248,6 +250,7 @@ export class UserInfoComponent {
       this.userSrv.editUserInfo(this.currentUser).subscribe({
         next: data => {
           if(data.status === 200 && data.data.length > 0){
+            this.auth.refreshUser(this.currentUser);
             this.alert.showAlert('修改成功', );
             console.log('修改成功');
           }else{
@@ -264,38 +267,4 @@ export class UserInfoComponent {
     this.tables.nativeElement.style.transform = `rotateY(${this.currentAngle}deg)`;
     this.editMode = false;
   }
-  getRole(role: number): string {
-    switch (role) {
-      case 1:
-        return '主管';
-      case 2:
-        return '職員';
-      default:
-        return '未知';
-    }
-  }
-  getDepartment(department: number): string {
-    switch (department) {
-      case 1:
-        return '後端';
-      case 2:
-        return '前端';
-      default:
-        return '未知';
-    }
-  }
-}
-
-interface UserInfo{
-  user_name: string;
-  real_name:string;
-  phone: string;
-  emergency: string;
-  emergency_phone: string;
-  address: string;
-  start_date: Date;
-  special_date: number;
-  special_date_delay: number;
-  role: string;
-  department: string;
 }
