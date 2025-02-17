@@ -1,7 +1,7 @@
 <div class="container">
   <div class="login-container">
-    <input matInput type="text" [(ngModel)]="loginName" placeholder="輸入帳號" />
-    <input matInput type="password" [(ngModel)]="loginPassword" placeholder="輸入密碼" />
+    <input matInput type="text" maxlength="10" [(ngModel)]="loginName" placeholder="輸入帳號" />
+    <input matInput type="password" maxlength="10" [(ngModel)]="loginPassword" placeholder="輸入密碼" />
     <div class="button-container">
       <button (click)="loginUser()">登入</button>
       <button (click)="cancelLogin()">取消</button>

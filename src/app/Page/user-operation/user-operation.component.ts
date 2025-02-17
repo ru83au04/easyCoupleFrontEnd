@@ -21,16 +21,15 @@ import { AlertService } from '../../Service/alert.service';
               <mat-icon>person</mat-icon>
               <p>{{ userName }}</p>
             </div>
-            <div class="logout">
-              <span>自動登出倒數</span>
-              <button mat-stroked-button (click)="logout()">登出</button>
-            </div>
+          </div>
+          <div class="logout">
+            <button id="logoutBtn" mat-flat-button (click)="logout()">登出</button>
           </div>
         </div>
         <div class="button-container">
-          <button mat-stroked-button [routerLink]="['/user-operation/attendance']">出勤</button>
-          <button mat-flat-button [routerLink]="['/user-operation/user-calendar']">行事曆</button>
-          <button mat-fab-extended [routerLink]="['/user-operation/user-info']">個人資料</button>
+          <button class="toolBarBtn" mat-button [routerLink]="['/user-operation/attendance']">出勤</button>
+          <button class="toolBarBtn" mat-button [routerLink]="['/user-operation/user-calendar']">行事曆</button>
+          <button class="toolBarBtn" mat-button [routerLink]="['/user-operation/user-info']">個人資料</button>
         </div>
       </mat-toolbar>
       <router-outlet></router-outlet>
@@ -47,6 +46,8 @@ import { AlertService } from '../../Service/alert.service';
       mat-toolbar {
         height: fit-content;
         display: flex;
+        background-color: transparent;
+        margin: 10px 50px 10px 50px;
       }
 
       mat-icon {
@@ -55,8 +56,8 @@ import { AlertService } from '../../Service/alert.service';
       }
 
       .user {
+        display: flex;
         width: fit-content;
-        background: green;
       }
 
       .user-info {
@@ -65,7 +66,6 @@ import { AlertService } from '../../Service/alert.service';
       }
 
       .icon-and-name {
-        width: 100%;
         margin: 5px;
         display: flex;
         align-items: center;
@@ -73,23 +73,40 @@ import { AlertService } from '../../Service/alert.service';
 
       mat-icon {
         padding: 10px;
+        color: var(--block-color);
       }
 
       .user-info p {
-        width: 100%;
         text-align: center;
+        color: var(--text-color);
         margin: 10px;
       }
 
       .logout {
-        margin: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #logoutBtn {
+        height: auto;
+        background-color: var(--block-color);
       }
 
       .button-container {
         width: 100%;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-evenly;
         align-items: center;
+        margin-right: 10px;
+        margin-left: 10px;
+        padding-right: 10px;
+        padding-left: 10px;
+      }
+
+      .button-container .toolBarBtn {
+        color: var(--text-color);
+        font-size: 1.3rem;
       }
 
       .calendar-container {
@@ -112,39 +129,37 @@ import { AlertService } from '../../Service/alert.service';
   ],
 })
 export class UserOperationComponent {
-  // HACK: 開發用
-  userName: string = '王紹安';
+  userName: string = '';
+  inputTime!: { title: string; targetDate: Date; plus: boolean; callback?: () => void };
+  counter = false;
   constructor(private userSrv: UserService, private authSrv: AuthService, private alert: AlertService, private router: Router) {}
 
   ngOnInit() {
     this.initAuth();
   }
-
+  
   initAuth() {
-    let token = sessionStorage.getItem('easy_couple_token');
-    if (token) {
-      try {
-        this.userSrv.getUserInfo(token).subscribe({
-          next: data => {
-            if (data.status === 200) {
-              this.authSrv.loginUser(data.data[0]);
-              this.authSrv.currentUser$?.subscribe({
-                next: data => {
-                  this.userName = data.real_name;
-                },
-                error: err => {
-                  console.log(err);
-                },
-              });
-            }
-          },
-          error: err => {
-            console.log(err);
-          },
-        });
-      } catch (err) {
-        console.log(err);
-      }
+    try {
+      this.userSrv.getUserInfo().subscribe({
+        next: data => {
+          if (data.status === 200) {
+            this.authSrv.loginUser(data.data[0]);
+            this.authSrv.currentUser$?.subscribe({
+              next: data => {
+                this.userName = data.real_name;
+              },
+              error: err => {
+                console.log(err);
+              },
+            });
+          }
+        },
+        error: err => {
+          console.log(err);
+        },
+      });
+    } catch (err) {
+      console.log(err);
     }
   }
   logout() {

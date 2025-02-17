@@ -23,6 +23,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
       .calendar-container {
         display: flex;
         flex-wrap: wrap;
+        padding: 30px 100px 80px 100px;
       }
 
       .calendar-card {

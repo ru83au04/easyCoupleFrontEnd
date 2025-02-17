@@ -1,8 +1,8 @@
 <div class="container">
   <div class="regist-container" *ngIf="!detail">
-    <input type="text" [(ngModel)]="username" placeholder="輸入帳號" />
-    <input type="password" [(ngModel)]="password" placeholder="輸入密碼" />
-    <input type="password" [(ngModel)]="checkPassword" placeholder="再次輸入密碼" />
+    <input type="text" maxlength="10" [(ngModel)]="username" placeholder="輸入帳號" (input)="onInputChange($event)"/>
+    <input type="password" maxlength="10" [(ngModel)]="password" placeholder="輸入密碼" (input)="onInputChange($event)"/>
+    <input type="password" maxlength="10" [(ngModel)]="checkPassword" placeholder="再次輸入密碼" (input)="onInputChange($event)"/>
     <div class="button-container">
       <button (click)="checkUser()">註冊</button>
       <button (click)="closeRegist()">取消</button>
@@ -10,10 +10,8 @@
   </div>
   <div class="step2" *ngIf="detail">
     <div>
-      <input type="text" [(ngModel)]="username" placeholder="輸入帳號" disabled />
-      <input type="password" [(ngModel)]="password" placeholder="輸入密碼" disabled />
       <div class="select-container">
-        <div>
+        <!-- <div>
           <label>職務(必填)</label>
           <select type="text" [(ngModel)]="role">
             <option value="" disabled selected>請選擇職務</option>
@@ -26,7 +24,7 @@
             <option value=" " disabled selected>請選擇部門</option>
             <option *ngFor="let department of departments" [value]="department">{{ department }}</option>
           </select>
-        </div>
+        </div> -->
         <div>
           <label>到職日期</label>
           <input type="date" [(ngModel)]="start_date" />
@@ -34,12 +32,15 @@
       </div>
     </div>
     <div>
-      <input *ngFor="let data of basicData" type="{{ data.type }}" [(ngModel)]="data.name" placeholder="{{ data.placeholder }}" />
+      <input *ngFor="let data of basicData" maxlength="10" type="{{ data.type }}" 
+      [(ngModel)]="data.name" placeholder="{{ data.placeholder }}" (input)="data.placeholder.endsWith('電話') ? onPhoneChange($event) : ''"/>
     </div>
     <div>
       <textarea class="address" [(ngModel)]="address" placeholder="輸入聯絡地址"></textarea>
     </div>
-
-    <button (click)="registUser()">確認</button>
+    <div class="button-container">
+      <button (click)="registUser()">確認</button>
+      <button (click)="closeRegist()">取消</button>
+    </div>
   </div>
 </div>
