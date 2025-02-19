@@ -1,3 +1,26 @@
+.direction {
+  z-index: 999;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 70%;
+  width: 70%;
+}
+
+.open-direction{
+  z-index: 999;
+  position: absolute;
+  bottom: 2%;
+  right: 2%;
+  height: fit-content;
+  width: fit-content;
+  font-size: 1rem;
+  padding: 5px;
+  background-color: var(--direction-color);
+  border: none;
+}
+
 .button-container {
     display: flex;
     justify-content: center;

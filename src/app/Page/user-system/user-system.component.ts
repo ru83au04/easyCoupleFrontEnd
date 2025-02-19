@@ -3,14 +3,14 @@ import { FormsModule } from '@angular/forms';
 import { UserService } from '../../Service/user.service';
 import { AlertService } from '../../Service/alert.service';
 import { NgIf } from '@angular/common';
-import { AuthService } from '../../Service/auth.service';
 import { RegistComponent } from './regist/regist.component';
 import { LoginComponent } from './login/login.component';
 import { Router } from '@angular/router';
+import { DirectionComponent, Content } from "../direction/direction.component";
 
 @Component({
   selector: 'app-user-system',
-  imports: [FormsModule, NgIf, RegistComponent, LoginComponent],
+  imports: [FormsModule, NgIf, RegistComponent, LoginComponent, DirectionComponent],
   templateUrl: './user-system.component.html',
   styleUrls: ['./user-system.component.css'],
 })
@@ -19,6 +19,22 @@ export class UserSystemComponent {
   showAlert: boolean = false;
   showRegistPage: boolean = false;
   showLoginPage: boolean = false;
+  direction: boolean = true;
+  content: Content ={
+    title: '使用者系統',
+    content: `
+    註冊使用者
+      1. 輸入帳號密碼點選註冊後，系統會自動檢查：
+        a. 帳號名稱是否已被使用
+        b. 確認密碼是否正確
+      2. 帳號、密碼確認沒問題後，會要求輸入基本資訊，必填欄位填妥後點選確認，會有通知視窗顯示註冊結果
+    登入使用者
+      1. 使用已註冊的帳號、密碼登入
+      2. 登入後可以修改部分使用者資訊
+      3. 點選登出可以登出帳號
+      備註：行事曆與出勤打卡功能目前建置中
+    `,
+  }
 
   constructor(private userSrv: UserService, private alertSrv: AlertService, private router: Router) {}
 
@@ -34,9 +50,9 @@ export class UserSystemComponent {
       this.showLoginPage = false;
     }
   }
-  
+
   // NOTE: 取消註冊或登入
-  onCancel(event: boolean){
+  onCancel(event: boolean) {
     this.showRegistPage = event;
     this.showLoginPage = event;
   }
@@ -48,7 +64,7 @@ export class UserSystemComponent {
       this.router.navigate(['/user-operation']);
     }
   }
-  
+
   async deleteUser(id: number) {
     try {
       let token = localStorage.getItem('token');
@@ -81,6 +97,15 @@ export class UserSystemComponent {
       // TODO: 跳出提醒視窗
       console.error('刪除失敗', err);
     }
+  }
+
+  openDirection() {
+    this.direction = true;
+  }
+
+  onClose(hidden: boolean) {
+    console.log('hidden');
+    this.direction = hidden;
   }
 }
 

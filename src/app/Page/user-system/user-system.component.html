@@ -1,4 +1,6 @@
+<app-direction class="direction" [content]="content" (close)="onClose($event)" *ngIf="direction"></app-direction>
 <div>
+  <button class="open-direction" (click)="openDirection()" *ngIf="!direction">使用說明</button>
   <div *ngIf="!showLoginPage && !showRegistPage" class="button-container">
     <div class="user-system-block" (click)="showPage('regist')">註冊</div>
     <div class="user-system-block" (click)="showPage('login')">登入</div>

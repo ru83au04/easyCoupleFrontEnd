@@ -1,5 +1,7 @@
+<app-direction class="direction" [content]="content" (close)="onClose($event)" *ngIf="direction"></app-direction>
 <main class="container">
     <!-- <button (click)="findFood()">找食物</button> -->
+    <button class="open-direction" (click)="openDirection()" *ngIf="!direction">使用說明</button>
     <div class="button-container">
       <select [(ngModel)]="selectedArea">
         <option value="" disabled>請選擇地區</option>

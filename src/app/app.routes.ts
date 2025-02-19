@@ -8,6 +8,7 @@ import { AboutComponent } from './Page/about/about.component';
 import { ProjectComponent } from './Page/project/project.component';
 import { userSystemGuard } from './guards/user-system.guard';
 import { UserOperationComponent } from './Page/user-operation/user-operation.component';
+import { DirectionComponent } from './Page/direction/direction.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -33,4 +34,5 @@ export const routes: Routes = [
       { path: 'attendance', loadComponent: () => import('./Page/user-operation/attendance/attendance.component').then(m => m.AttendanceComponent) },
     ],
   },
+  { path: 'test', component: DirectionComponent}
 ];
