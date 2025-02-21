@@ -95,7 +95,7 @@ import { AlertService } from '../../../Service/alert.service';
         border-radius: 10px;
       }
 
-      .index-column{
+      .index-column {
         width: 150px;
       }
 
@@ -122,11 +122,11 @@ import { AlertService } from '../../../Service/alert.service';
         width: 50%;
       }
 
-      .info-container{
+      .info-container {
         width: 50%;
       }
 
-      .button-container{
+      .button-container {
         width: 100%;
         display: flex;
         justify-content: center;
@@ -139,6 +139,37 @@ import { AlertService } from '../../../Service/alert.service';
         padding: 10px;
         margin: 10px;
         font-size: 1.2rem;
+      }
+
+      @media (max-width: 786px) {
+        .container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 30px 50px 50px 50px;
+        }
+        .right-area {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-evenly;
+          margin: 20px;
+          width: 100%;
+        }
+        .info-container {
+          width: fit-content;
+        }
+        .button-container {
+          width: fit-content;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .container {
+          padding: 20px;
+        }
+        td{
+          padding: 0px;
+        }
       }
     `,
   ],
@@ -200,7 +231,7 @@ export class UserInfoComponent {
     if (editMode) {
       this.userData.data = [
         { property: '姓名', value: this.currentUser.real_name },
-        { property: '連絡電話', value: this.currentUser.phone},
+        { property: '連絡電話', value: this.currentUser.phone },
         { property: '緊急聯絡人', value: this.currentUser.emergency },
         { property: '緊急連絡電話', value: this.currentUser.emergency_phone },
         { property: '地址', value: this.currentUser.address },
@@ -209,7 +240,7 @@ export class UserInfoComponent {
     }
     this.userData.data = [
       { property: '姓名', value: user.real_name },
-      { property: '連絡電話', value: user.phone},
+      { property: '連絡電話', value: user.phone },
       { property: '職務', value: user.role },
       { property: '部門', value: user.department },
       { property: '帳號', value: user.username },
@@ -249,17 +280,17 @@ export class UserInfoComponent {
 
       this.userSrv.editUserInfo(this.currentUser).subscribe({
         next: data => {
-          if(data.status === 200 && data.data.length > 0){
+          if (data.status === 200 && data.data.length > 0) {
             this.auth.refreshUser(this.currentUser);
-            this.alert.showAlert('修改成功', );
+            this.alert.showAlert('修改成功');
             console.log('修改成功');
-          }else{
+          } else {
             console.log('修改失敗');
           }
         },
         error: err => {
           console.error(err);
-        }
+        },
       });
     }
     this.setUserData(this.currentUser);

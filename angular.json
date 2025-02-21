@@ -16,19 +16,10 @@
             "outputPath": "../../express_backend/public/front_end",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "src/favicon.icon",
-              "src/assets"
-            ],
-            "styles": [
-              "@angular/material/prebuilt-themes/azure-blue.css",
-              "src/styles.css",
-              "node_modules/highlight.js/styles/monokai-sublime.css"
-            ],
+            "assets": ["src/assets"],
+            "styles": ["@angular/material/prebuilt-themes/azure-blue.css", "src/styles.css", "node_modules/highlight.js/styles/monokai-sublime.css"],
             "scripts": []
           },
           "configurations": {
@@ -86,10 +77,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "src/test.ts",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
               {
@@ -97,11 +85,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "@angular/material/prebuilt-themes/azure-blue.css",
-              "src/styles.css",
-              "node_modules/highlight.js/styles/monokai-sublime.css"
-            ],
+            "styles": ["@angular/material/prebuilt-themes/azure-blue.css", "src/styles.css", "node_modules/highlight.js/styles/monokai-sublime.css"],
             "scripts": []
           }
         }

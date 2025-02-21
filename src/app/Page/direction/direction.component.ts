@@ -6,11 +6,15 @@ import { Component, ElementRef, EventEmitter, Input, Output, SimpleChanges, View
   imports: [NgFor],
   template: `
     <main>
-      <div class="close" (click)="closeWindow()">X</div>
       <div class="content">
-        <h1>{{ content.title }}</h1>
-        <div>
-          <p *ngFor="let line of article" [innerHTML]="line"></p>
+        <div class="close" (click)="closeWindow()">X</div>
+        <div class="text">
+          <div>
+            <h1>{{ content.title }}</h1>
+          </div>
+          <div>
+            <p *ngFor="let line of article" [innerHTML]="line"></p>
+          </div>
         </div>
       </div>
     </main>
@@ -18,42 +22,29 @@ import { Component, ElementRef, EventEmitter, Input, Output, SimpleChanges, View
   styles: [
     `
       main {
-        width: 100%;
         height: 100%;
+        width: 100%;
       }
       .content {
         display: flex;
         flex-direction: column;
-        overflow-y: auto;
-        // margin: 10px;
         padding: 15px;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
         z-index: 998;
-        height: 98%;
-        width: 98%;
-        right: 0;
-        bottom: 0;
         border-radius: 30px;
         background-color: var(--direction-color);
       }
-
       .close {
+        z-index: 999;
+        height: 5px;
+      }
+      .text {
+        height: 100%;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        font-size: 20px;
-        z-index: 999;
-        background-color: rgb(65, 45, 15);
-        border-radius: 50%;
-        position: absolute;
-        width: 50px;
-        height: 50px;
-        left: -3%;
-        top: -8%;
-        color: white;
-        cursor: pointer;
+        padding: 15px;
+        overflow-y: auto;
       }
     `,
   ],

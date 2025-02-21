@@ -40,21 +40,20 @@ import { AlertService } from '../../Service/alert.service';
   styles: [
     `
       .container {
-        width: 100%;
         display: flex;
         flex-direction: column;
       }
 
       mat-toolbar {
         height: fit-content;
+        width: auto;
         display: flex;
         background-color: transparent;
-        margin: 10px 50px 10px 50px;
+        margin: 10px 20px 10px 20px;
       }
 
       mat-icon {
-        margin: 0px;
-        padding: 0px;
+        color: var(--block-color);
       }
 
       .user {
@@ -73,11 +72,6 @@ import { AlertService } from '../../Service/alert.service';
         align-items: center;
       }
 
-      mat-icon {
-        padding: 10px;
-        color: var(--block-color);
-      }
-
       .user-info p {
         text-align: center;
         color: var(--text-color);
@@ -91,7 +85,8 @@ import { AlertService } from '../../Service/alert.service';
       }
 
       #logoutBtn {
-        height: auto;
+        height: fit-content;
+        padding: 3px;
         background-color: var(--block-color);
       }
 
@@ -100,10 +95,6 @@ import { AlertService } from '../../Service/alert.service';
         display: flex;
         justify-content: space-evenly;
         align-items: center;
-        margin-right: 10px;
-        margin-left: 10px;
-        padding-right: 10px;
-        padding-left: 10px;
       }
 
       .button-container .toolBarBtn {
@@ -126,6 +117,64 @@ import { AlertService } from '../../Service/alert.service';
         flex-direction: column;
         justify-content: center;
         align-items: center;
+      }
+
+      @media (max-width: 786px) {
+        .user-info p {
+          text-align: center;
+          color: var(--text-color);
+          margin: 3px;
+          font-size: 1.2rem;
+        }
+
+        #logoutBtn {
+          padding: 0px;
+          margin: 0px;
+          font-size: 0.8rem;
+        }
+
+        .button-container {
+          width: 100%;
+          display: flex;
+          justify-content: space-evenly;
+          align-items: center;
+        }
+        .button-container .toolBarBtn {
+          color: var(--text-color);
+          font-size: 1.2rem;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .user {
+          display: flex;
+          flex-direction: column;
+          width: fit-content;
+        }
+        .user-info p {
+          text-align: center;
+          color: var(--text-color);
+          margin: 3px;
+          font-size: 1rem;
+        }
+
+        #logoutBtn {
+          padding: 0px;
+          margin: 0px;
+          font-size: 0.6rem;
+          height: 0.6rem;
+        }
+
+        .button-container {
+          width: 100%;
+          display: flex;
+          justify-content: space-evenly;
+          align-items: center;
+        }
+        .button-container .toolBarBtn {
+          color: var(--text-color);
+          font-size: 1rem;
+        }
       }
     `,
   ],
