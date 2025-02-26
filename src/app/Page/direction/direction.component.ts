@@ -35,8 +35,16 @@ import { Component, ElementRef, EventEmitter, Input, Output, SimpleChanges, View
       }
       .close {
         z-index: 999;
-        height: 5px;
+        height: 20px;
+        width: 20px;
+        padding: 0px;
+        margin: 0px;
       }
+      .close:hover{
+        cursor: pointer;
+        transform: translate(2px, -2px);
+      }
+
       .text {
         height: 100%;
         display: flex;

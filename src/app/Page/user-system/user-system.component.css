@@ -1,14 +1,14 @@
 .direction {
   z-index: 999;
   position: absolute;
-  top: 50%;
+  top: 25%;
   left: 50%;
   transform: translate(-50%, -50%);
   height: 30%;
   width: 70%;
 }
 
-.open-direction {
+.open-direction { 
   z-index: 999;
   position: absolute;
   bottom: 2%;
