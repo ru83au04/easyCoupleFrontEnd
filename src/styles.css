@@ -96,7 +96,7 @@ option {
     padding: 0px;
     margin: 5px;
   }
-} 
+}
 @media (max-width: 576px) {
   button {
     font-size: 1.2rem;
