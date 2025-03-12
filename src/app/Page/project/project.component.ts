@@ -26,7 +26,7 @@ export class ProjectComponent {
     {
       out: true,
       title: 'Firebase建立使用者系統',
-      path: 'https://newattendance-da58a.firebaseapp.com/',
+      path: 'https://newattendance-da58a.web.app/',
       content: '使用 Firebase建立使用者系統，包含註冊、登入、修改個人資料、登出等功能。',
     },
   ];

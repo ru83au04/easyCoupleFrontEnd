@@ -15,6 +15,7 @@
   --block-color: rgba(4, 77, 90, 1);
   --block-color-truth: 4, 77, 90;
   --direction-color: rgba(65, 39, 1, 0.86);
+  --mark-color: rgba(214, 38, 67, 0.86);
 }
 ::-webkit-scrollbar {
   display: none;

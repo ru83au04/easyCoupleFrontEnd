@@ -21,13 +21,17 @@ h1{
     color: var(--text-color);
     position: absolute;
     bottom: 20px;
-    right: 20px;
+    right: -60px;
     background-color: rgba(var(--block-color-truth), 0.5);
     border-radius: 10px;
     height: fit-content;
     width: fit-content;
     transition: right 0.3s ease;
     padding: 5px;
+}
+
+button:hover{
+    transform: none;
 }
 
 ::ng-deep li {
@@ -47,10 +51,6 @@ h1{
         padding-right: 30px;
         padding-bottom: 30px;
         font-size: 1.2rem;
-    }
-    #back{
-        bottom: 20px;
-        right: 20px;
     }
 }
 

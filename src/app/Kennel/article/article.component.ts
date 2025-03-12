@@ -59,6 +59,25 @@ export class ArticleComponent {
     articleHTML.querySelectorAll('em').forEach((block: HTMLElement) => {
       block.style.paddingRight = '20px';
     });
+    articleHTML.querySelectorAll('img').forEach((block: HTMLElement) => {
+      block.style.maxWidth = '100%';
+      block.style.height = 'auto';
+    });
+    articleHTML.querySelectorAll('blockquote').forEach((block: HTMLElement) => {
+      block.style.borderLeft = '5px solid var(--text-color)';
+      block.style.paddingLeft = '20px';
+      block.style.margin = '50px';
+    });
+    articleHTML.querySelectorAll('p code').forEach((block: HTMLElement) => {
+      block.style.background = 'var(--mark-color)';
+      block.style.padding = '1px 5px 1px 5px';
+      block.style.borderRadius = '7px';
+    });
+    articleHTML.querySelectorAll('li code').forEach((block: HTMLElement) => {
+      block.style.background = 'var(--mark-color)';
+      block.style.padding = '1px 5px 1px 5px';
+      block.style.borderRadius = '7px';
+    });
   }
 
    // NOTE: 關閉文章視窗(使用 @Output發送事件)
